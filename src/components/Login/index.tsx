@@ -1,16 +1,108 @@
 "use client";
 
-import { Button, Container } from "@mui/material";
-import Link from "next/link";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Link from "@mui/material/Link";
+import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 
-export default function LoginPage() {
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+
+export default function Login() {
+  const router = useRouter();
+
+  const handleSubmit = (
+    event: React.KeyboardEvent<HTMLInputElement> & {
+      currentTarget: HTMLFormElement;
+    }
+  ) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    console.log({
+      email: data.get("email"),
+      password: data.get("password"),
+    });
+  };
+
   return (
-    <Container>
-      <h1>hello</h1>
-      <Link href="/dashboard">go to dashboard</Link>
-      <Button color="primary" variant="outlined">
-        neutral
-      </Button>
-    </Container>
+    <main className="container flex justify-center items-center mx-auto h-screen">
+      <Box
+        sx={{
+          marginTop: 8,
+        }}
+      >
+        <Paper className="p-3">
+          <Box
+            sx={{
+              my: 8,
+              mx: 4,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Paper className="bg-dark py-3 w-full flex justify-center items-center">
+              <Image
+                width={200}
+                height={200}
+                src="/logo.png"
+                alt="logo da aplicação"
+              />
+            </Paper>
+            <Box
+              component="form"
+              noValidate
+              onSubmit={handleSubmit}
+              sx={{ mt: 1 }}
+            >
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+              />
+
+              <Button
+                type="submit"
+                fullWidth
+                variant="outlined"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={() => router.push("/")}
+              >
+                Entrar
+              </Button>
+              <Grid container>
+                <Grid item xs>
+                  <Link href="#" variant="body2">
+                    Esqueceu sua senha?
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link href="#" variant="body2">
+                    {"Não é cadastrado? Crie sua conta!"}
+                  </Link>
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
+        </Paper>
+      </Box>
+    </main>
   );
 }

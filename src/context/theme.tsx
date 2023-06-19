@@ -1,6 +1,6 @@
 "use client";
+
 import { ThemeProvider, createTheme } from "@mui/material";
-import { purple, red } from "@mui/material/colors";
 import * as React from "react";
 
 interface IContext {}

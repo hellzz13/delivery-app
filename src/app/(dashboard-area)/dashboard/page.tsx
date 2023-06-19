@@ -1,34 +1,20 @@
 "use client";
-import { Box, Button, IconButton } from "@mui/material";
+import { Container, IconButton } from "@mui/material";
 
 import { Add } from "@mui/icons-material";
 
 import Link from "next/link";
-import TableSkeleton from "@/components/Skeleton/TableSkeleton";
+import CustomTable from "@/components/table";
+import BasicModal from "@/components/Modal";
 
 export default function Dashboard() {
   return (
-    <main className="flex justify-center items-center w-full h-screen flex-col">
-      <h1>Aqui é a dashboard</h1>
+    <Container style={{ marginTop: "100px" }}>
       <Link href="/">voltar</Link>
 
-      <Box
-        sx={{
-          position: "absolute",
-          right: "20px",
-          bottom: "20px",
-        }}
-      >
-        <IconButton color="inherit" aria-label="add" size="medium">
-          <Add sx={{ fontSize: "40px" }} />
-        </IconButton>
-      </Box>
+      <CustomTable />
 
-      <Button variant="contained" startIcon={<Add sx={{ fontSize: "40px" }} />}>
-        Button
-      </Button>
-
-      {/* <TableSkeleton /> */}
-    </main>
+      <BasicModal />
+    </Container>
   );
 }

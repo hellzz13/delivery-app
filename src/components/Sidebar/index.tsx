@@ -19,6 +19,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 
 import Image from "next/image";
+import { Icon } from "@mui/material";
 
 const drawerWidth = 240;
 
@@ -40,33 +41,33 @@ export default function Sidebar(props: Props) {
   };
 
   const sidebarItems = [
-    { name: "Deslocamentos", active: false, Icon: "start", href: "#" },
-    { name: "Condutores", active: false, Icon: "InboxIcon", href: "#" },
-    { name: "Clientes", active: false, Icon: "InboxIcon", href: "#" },
-    { name: "Veiculos", active: false, Icon: "InboxIcon", href: "#" },
+    { name: "Deslocamentos", active: false, icon: "route", href: "#" },
+    { name: "Condutores", active: false, icon: "person", href: "#" },
+    { name: "Clientes", active: false, icon: "folder_shared", href: "#" },
+    { name: "Veiculos", active: false, icon: "local_shipping", href: "#" },
   ];
 
   const drawer = (
     <div>
       <Toolbar>
-        <img
-          src="/logo-truck.png"
+        <Image
+          src="/logo.png"
           className="mx-auto"
-          // width={300}
-          // height={300}
+          width={140}
+          height={140}
           alt="Logo sistema Intruck"
         />
       </Toolbar>
       <Divider />
       <List>
-        {sidebarItems.map(({ Icon, ...item }) => {
+        {sidebarItems.map((item) => {
           return (
             <ListItem key={item.name} disablePadding>
               <ListItemButton
                 sx={{ color: "#fff", ":hover": { backgroundColor: "#1e2535" } }}
               >
                 <ListItemIcon>
-                  <InboxIcon color="primary" />
+                  <Icon color="primary">{item.icon}</Icon>
                 </ListItemIcon>
                 <ListItemText primary={item.name} />
               </ListItemButton>
@@ -74,6 +75,18 @@ export default function Sidebar(props: Props) {
           );
         })}
       </List>
+      <Divider />
+
+      <ListItem disablePadding>
+        <ListItemButton
+          sx={{ color: "#fff", ":hover": { backgroundColor: "#1e2535" } }}
+        >
+          <ListItemIcon>
+            <Icon color="primary">logout</Icon>
+          </ListItemIcon>
+          <ListItemText primary="Logout" />
+        </ListItemButton>
+      </ListItem>
     </div>
   );
 
@@ -90,7 +103,7 @@ export default function Sidebar(props: Props) {
           ml: { sm: `${drawerWidth}px` },
         }}
       >
-        <Toolbar className="bg-dark">
+        <Toolbar className="bg-dark h-24">
           <IconButton
             color="inherit"
             aria-label="open drawer"
