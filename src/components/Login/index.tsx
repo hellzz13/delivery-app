@@ -28,81 +28,78 @@ export default function Login() {
 
   return (
     <main className="container flex justify-center items-center mx-auto h-screen">
-      <Box
-        sx={{
-          marginTop: 8,
-        }}
+      <Paper
+        className="backdrop-blur-3xl bg-opacity-70 p-3 rounded-3xl"
+        elevation={24}
       >
-        <Paper className="p-3">
+        <Box
+          sx={{
+            my: 8,
+            mx: 4,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Paper className="bg-dark py-3 w-60 h-60 flex justify-center items-center rounded-full">
+            <Image
+              width={200}
+              height={200}
+              src="/logo.png"
+              alt="logo da aplicação"
+            />
+          </Paper>
           <Box
-            sx={{
-              my: 8,
-              mx: 4,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
+            component="form"
+            noValidate
+            onSubmit={handleSubmit}
+            sx={{ mt: 1 }}
           >
-            <Paper className="bg-dark py-3 w-full flex justify-center items-center">
-              <Image
-                width={200}
-                height={200}
-                src="/logo.png"
-                alt="logo da aplicação"
-              />
-            </Paper>
-            <Box
-              component="form"
-              noValidate
-              onSubmit={handleSubmit}
-              sx={{ mt: 1 }}
-            >
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                autoFocus
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
 
-              <Button
-                type="submit"
-                fullWidth
-                variant="outlined"
-                sx={{ mt: 3, mb: 2 }}
-                onClick={() => router.push("/")}
-              >
-                Entrar
-              </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Esqueceu sua senha?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Não é cadastrado? Crie sua conta!"}
-                  </Link>
-                </Grid>
+            <Button
+              type="submit"
+              fullWidth
+              variant="outlined"
+              sx={{ mt: 3, mb: 2 }}
+              onClick={() => router.push("/")}
+            >
+              Entrar
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                  Esqueceu sua senha?
+                </Link>
               </Grid>
-            </Box>
+              <Grid item>
+                <Link href="#" variant="body2">
+                  {"Não é cadastrado? Crie sua conta!"}
+                </Link>
+              </Grid>
+            </Grid>
           </Box>
-        </Paper>
-      </Box>
+        </Box>
+      </Paper>
     </main>
   );
 }

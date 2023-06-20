@@ -25,6 +25,17 @@ const ThemeContext: React.FC<IProvider> = ({ children }) => {
       background: {
         default: "#1e2535",
       },
+      text: {
+        primary: "#000",
+        secondary: "#c2c2c2",
+      },
+    },
+    components: {
+      MuiTextField: {
+        styleOverrides: {
+          root: { backgroundColor: "#fff" },
+        },
+      },
     },
   });
   return (

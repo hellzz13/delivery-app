@@ -1,10 +1,12 @@
+"use client";
+
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { IconButton } from "@mui/material";
-import { Add } from "@mui/icons-material";
+import { TextField } from "@mui/material";
+
 import AddButton from "../Button/AddButton";
 
 const style = {
@@ -13,7 +15,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: "background.paper",
+  bgcolor: "#19212C",
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
@@ -40,6 +42,44 @@ export default function BasicModal() {
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
           </Typography>
+          <Box
+            component="form"
+            noValidate
+            // onSubmit={handleSubmit}
+            sx={{ mt: 1 }}
+          >
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              variant="filled"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              variant="filled"
+              autoComplete="current-password"
+            />
+
+            <Button
+              type="submit"
+              fullWidth
+              variant="outlined"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Cadastrar
+            </Button>
+          </Box>
         </Box>
       </Modal>
     </div>

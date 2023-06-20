@@ -20,6 +20,7 @@ import Typography from "@mui/material/Typography";
 
 import Image from "next/image";
 import { Icon } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 const drawerWidth = 240;
 
@@ -36,12 +37,19 @@ export default function Sidebar(props: Props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
+  const router = useRouter();
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
   const sidebarItems = [
-    { name: "Deslocamentos", active: false, icon: "route", href: "#" },
+    {
+      name: "Deslocamentos",
+      active: false,
+      icon: "route",
+      href: "/deslocamento",
+    },
     { name: "Condutores", active: false, icon: "person", href: "#" },
     { name: "Clientes", active: false, icon: "folder_shared", href: "#" },
     { name: "Veiculos", active: false, icon: "local_shipping", href: "#" },
@@ -62,7 +70,11 @@ export default function Sidebar(props: Props) {
       <List>
         {sidebarItems.map((item) => {
           return (
-            <ListItem key={item.name} disablePadding>
+            <ListItem
+              key={item.name}
+              disablePadding
+              onClick={() => router.push(item.href)}
+            >
               <ListItemButton
                 sx={{ color: "#fff", ":hover": { backgroundColor: "#1e2535" } }}
               >
