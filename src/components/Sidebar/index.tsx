@@ -50,7 +50,7 @@ export default function Sidebar(props: Props) {
       icon: "route",
       href: "/deslocamento",
     },
-    { name: "Condutores", active: false, icon: "person", href: "#" },
+    { name: "Condutores", active: false, icon: "person", href: "/condutores" },
     { name: "Clientes", active: false, icon: "folder_shared", href: "#" },
     { name: "Veiculos", active: false, icon: "local_shipping", href: "#" },
   ];

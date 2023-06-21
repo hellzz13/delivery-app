@@ -8,23 +8,26 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 
-type ITableBase = {
-  rows: any[];
+import dayjs from "dayjs";
+import { Column } from "@/models/Columns";
+
+type ITableBase<T> = {
+  rows: T[];
   page: number;
   rowsPerPage: number;
   handleChangePage: (event: unknown, newPage: number) => void;
   handleChangeRowsPerPage: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  columns: any[];
+  columns: readonly Column[];
 };
 
-export default function TableBase({
+export default function TableBase<T>({
   rows,
   page,
   rowsPerPage,
   handleChangePage,
   handleChangeRowsPerPage,
   columns,
-}: ITableBase) {
+}: ITableBase<T>) {
   return (
     <>
       <TableContainer sx={{ maxHeight: 440 }}>
@@ -53,8 +56,8 @@ export default function TableBase({
                       console.log(value);
                       return (
                         <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === "number"
-                            ? column.format(value)
+                          {column.id === "inicioDeslocamento"
+                            ? dayjs(value).format("DD/MM/YYYY")
                             : value}
                         </TableCell>
                       );

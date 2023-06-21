@@ -2,14 +2,30 @@
 
 import TableBase from "@/components/TableBase";
 import { useTable } from "@/components/TableBase/useTable.hook";
-import { Column } from "@/models/Columns";
-import { Delivery } from "@/models/Delivery";
+import { Drivers } from "@/models/Drivers";
 import { api } from "@/services/api";
 import { CircularProgress, Paper, Typography } from "@mui/material";
 
 export default function Descolamento() {
   const { handleChangePage, handleChangeRowsPerPage, rows, page, rowsPerPage } =
-    useTable<Delivery>(api.getDelivery);
+    useTable<Drivers>(api.getDrivers);
+
+  interface Column {
+    id:
+      | "motivo"
+      | "kmInicial"
+      | "kmFinal"
+      | "inicioDeslocamento"
+      | "fimDeslocamento"
+      | "checkList"
+      | "observacao"
+      | "idCondutor"
+      | "idVeiculo"
+      | "idCliente";
+    label: string;
+    minWidth?: number;
+    align?: "center";
+  }
 
   const columns: readonly Column[] = [
     { id: "kmInicial", label: "Km Inicial", minWidth: 50 },
