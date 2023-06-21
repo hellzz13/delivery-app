@@ -41,14 +41,14 @@ export default function Login() {
             alignItems: "center",
           }}
         >
-          <Paper className="bg-dark py-3 w-60 h-60 flex justify-center items-center rounded-full">
+          <div className="bg-dark py-3 w-60 h-60 flex justify-center items-center rounded-full">
             <Image
               width={200}
               height={200}
               src="/logo.png"
               alt="logo da aplicação"
             />
-          </Paper>
+          </div>
           <Box
             component="form"
             noValidate

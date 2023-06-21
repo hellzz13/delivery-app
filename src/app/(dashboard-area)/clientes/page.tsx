@@ -4,13 +4,13 @@ import BasicModal from "@/components/Modal";
 import TableBase from "@/components/TableBase";
 import { useTable } from "@/components/TableBase/useTable.hook";
 import { Column } from "@/models/Columns";
-import { Drivers } from "@/models/Drivers";
+import { Consumer } from "@/models/Consumer";
 import { api } from "@/services/api";
 import { CircularProgress, Container, Paper, Typography } from "@mui/material";
 
-export default function DriversPage() {
+export default function ConsumersPage() {
   const { handleChangePage, handleChangeRowsPerPage, rows, page, rowsPerPage } =
-    useTable<Drivers>(api.getDrivers);
+    useTable<Consumer>(api.getConsumers);
 
   const columns: readonly Column[] = [
     { id: "kmInicial", label: "Km Inicial", minWidth: 50 },

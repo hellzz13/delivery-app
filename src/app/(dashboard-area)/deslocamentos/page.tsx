@@ -5,9 +5,9 @@ import { useTable } from "@/components/TableBase/useTable.hook";
 import { Column } from "@/models/Columns";
 import { Delivery } from "@/models/Delivery";
 import { api } from "@/services/api";
-import { CircularProgress, Paper, Typography } from "@mui/material";
+import { CircularProgress, Container, Paper, Typography } from "@mui/material";
 
-export default function Descolamento() {
+export default function DeliveryPage() {
   const { handleChangePage, handleChangeRowsPerPage, rows, page, rowsPerPage } =
     useTable<Delivery>(api.getDelivery);
 
@@ -42,29 +42,31 @@ export default function Descolamento() {
   ];
 
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden", marginTop: "100px" }}>
-      {rows ? (
-        rows.length >= 1 ? (
-          <TableBase
-            handleChangePage={handleChangePage}
-            handleChangeRowsPerPage={handleChangeRowsPerPage}
-            page={page}
-            rows={rows}
-            rowsPerPage={rowsPerPage}
-            columns={columns}
-          />
+    <Container>
+      <Paper sx={{ width: "100%", overflow: "hidden", marginTop: "100px" }}>
+        {rows ? (
+          rows.length >= 1 ? (
+            <TableBase
+              handleChangePage={handleChangePage}
+              handleChangeRowsPerPage={handleChangeRowsPerPage}
+              page={page}
+              rows={rows}
+              rowsPerPage={rowsPerPage}
+              columns={columns}
+            />
+          ) : (
+            <div className="py-16 w-full flex justify-center items-center">
+              <Typography variant="body1">
+                Não há dados à serem exibidos
+              </Typography>
+            </div>
+          )
         ) : (
           <div className="py-16 w-full flex justify-center items-center">
-            <Typography variant="body1">
-              Não há dados à serem exibidos
-            </Typography>
+            <CircularProgress />
           </div>
-        )
-      ) : (
-        <div className="py-16 w-full flex justify-center items-center">
-          <CircularProgress />
-        </div>
-      )}
-    </Paper>
+        )}
+      </Paper>
+    </Container>
   );
 }
