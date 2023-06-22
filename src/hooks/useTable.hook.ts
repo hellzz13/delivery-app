@@ -1,6 +1,7 @@
 import * as React from "react";
+import { useQuery } from "react-query";
 
-export function useTable<T>(fetchData: () => Promise<T[]>) {
+export function useTable<T>(fetchData: () => Promise<T[]>, queryKey: string) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -19,9 +20,18 @@ export function useTable<T>(fetchData: () => Promise<T[]>) {
     setPage(0);
   };
 
-  React.useEffect(() => {
-    fetchData().then((res) => setData(res));
-  }, [fetchData]);
+  function useData() {
+    return useQuery(
+      [queryKey],
+      async () => {
+        return fetchData().then((res) => setData(res));
+      },
+      //verify this time
+      { staleTime: 1000, refetchInterval: 30000 }
+    );
+  }
+
+  useData();
 
   return {
     page,

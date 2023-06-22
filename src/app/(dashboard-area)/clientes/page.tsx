@@ -1,16 +1,17 @@
 "use client";
 
-import BasicModal from "@/components/Modal";
+import FormConsumers from "@/components/Modal/FormConsumer";
 import TableBase from "@/components/TableBase";
+import ToastNotification from "@/components/ToastNotification";
 import { useTable } from "@/hooks/useTable.hook";
 import { Column } from "@/models/Columns";
 import { Consumer } from "@/models/Consumer";
-import { api } from "@/services/api";
+import { get } from "@/services/api";
 import { CircularProgress, Container, Paper, Typography } from "@mui/material";
 
 export default function ConsumersPage() {
   const { handleChangePage, handleChangeRowsPerPage, rows, page, rowsPerPage } =
-    useTable<Consumer>(api.getConsumers);
+    useTable<Consumer>(get.getConsumers, "consumers");
 
   const columns: readonly Column[] = [
     { id: "nome", label: "Nome", minWidth: 50 },
@@ -37,7 +38,8 @@ export default function ConsumersPage() {
 
   return (
     <Container>
-      <BasicModal />
+      <FormConsumers />
+      <ToastNotification />
       <Paper sx={{ width: "100%", overflow: "hidden", marginTop: "100px" }}>
         {rows ? (
           rows.length >= 1 ? (

@@ -2,7 +2,7 @@
 
 import { useDetails } from "@/hooks/useDetails.hook";
 import { Drivers } from "@/models/Drivers";
-import { api } from "@/services/api";
+import { get } from "@/services/api";
 import {
   Button,
   CircularProgress,
@@ -17,7 +17,7 @@ import { useRouter } from "next/navigation";
 
 export default function Page({ params }: { params: { id: string } }) {
   const { back } = useRouter();
-  const { data } = useDetails<Drivers>(api.getDriversById, params.id);
+  const { data } = useDetails<Drivers>(get.getDriversById, params.id);
 
   return (
     <Container style={{ marginTop: "110px" }}>
@@ -50,16 +50,6 @@ export default function Page({ params }: { params: { id: string } }) {
                 <span className="font-bold">Categoria da Habilitação:</span>{" "}
                 {data.catergoriaHabilitacao}
               </Grid>
-              {/* <Grid item xs={2} sm={4} md={4}>
-                <span className="font-bold">Status: </span>
-                {data.checkList}
-              </Grid>
-              <Grid item xs={2} sm={4} md={4}>
-                <span className="font-bold">Motivo:</span> {data.motivo}
-              </Grid>
-              <Grid item xs={2} sm={4} md={4}>
-                <span className="font-bold">observacao:</span> {data.observacao}
-              </Grid> */}
             </Grid>
           </Paper>
 

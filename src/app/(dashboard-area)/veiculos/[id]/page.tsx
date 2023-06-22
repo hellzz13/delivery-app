@@ -2,7 +2,7 @@
 
 import { useDetails } from "@/hooks/useDetails.hook";
 import { Vehicle } from "@/models/Vehicle";
-import { api } from "@/services/api";
+import { get } from "@/services/api";
 import {
   Button,
   CircularProgress,
@@ -16,7 +16,7 @@ import { useRouter } from "next/navigation";
 
 export default function Page({ params }: { params: { id: string } }) {
   const { back } = useRouter();
-  const { data } = useDetails<Vehicle>(api.getVehicleById, params.id);
+  const { data } = useDetails<Vehicle>(get.getVehicleById, params.id);
 
   return (
     <Container style={{ marginTop: "110px" }}>

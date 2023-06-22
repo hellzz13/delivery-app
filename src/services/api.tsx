@@ -4,56 +4,60 @@ import { Drivers } from "@/models/Drivers";
 import { Consumer } from "@/models/Consumer";
 import { Vehicle } from "@/models/Vehicle";
 
-const BASE_URL = "https://api-deslocamento.herokuapp.com/api/v1/";
+const api = axios.create({
+  baseURL: "https://api-deslocamento.herokuapp.com/api/v1/",
+});
+
+export default api;
 
 // get
 async function getDelivery(): Promise<Delivery[]> {
-  const { data } = await axios.get<Delivery[]>(`${BASE_URL}Deslocamento`);
+  const { data } = await api.get<Delivery[]>(`Deslocamento`);
 
   return data;
 }
 async function getDeliveryById(id: string): Promise<Delivery> {
-  const { data } = await axios.get<Delivery>(`${BASE_URL}Deslocamento/${id}`);
+  const { data } = await api.get<Delivery>(`Deslocamento/${id}`);
 
   return data;
 }
 
 async function getDrivers(): Promise<Drivers[]> {
-  const { data } = await axios.get<Drivers[]>(`${BASE_URL}Condutor`);
+  const { data } = await api.get<Drivers[]>(`Condutor`);
 
   return data;
 }
 async function getDriversById(id: string): Promise<Drivers> {
-  const { data } = await axios.get<Drivers>(`${BASE_URL}Condutor/${id}`);
+  const { data } = await api.get<Drivers>(`Condutor/${id}`);
 
   return data;
 }
 
 async function getConsumers(): Promise<Consumer[]> {
-  const { data } = await axios.get<Consumer[]>(`${BASE_URL}Cliente`);
+  const { data } = await api.get<Consumer[]>(`Cliente`);
 
   return data;
 }
 async function getConsumerById(id: string): Promise<Consumer> {
-  const { data } = await axios.get<Consumer>(`${BASE_URL}Cliente/${id}`);
+  const { data } = await api.get<Consumer>(`Cliente/${id}`);
 
   return data;
 }
 
 async function getVehicle(): Promise<Vehicle[]> {
-  const { data } = await axios.get<Vehicle[]>(`${BASE_URL}Veiculo`);
+  const { data } = await api.get<Vehicle[]>(`Veiculo`);
 
   return data;
 }
 async function getVehicleById(id: string): Promise<Vehicle> {
-  const { data } = await axios.get<Vehicle>(`${BASE_URL}Veiculo/${id}`);
+  const { data } = await api.get<Vehicle>(`Veiculo/${id}`);
 
   return data;
 }
 
 // post
 
-export const api = {
+export const get = {
   getDelivery,
   getDrivers,
   getConsumers,

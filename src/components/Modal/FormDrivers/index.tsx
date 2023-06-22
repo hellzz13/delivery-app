@@ -11,7 +11,9 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import AddButton from "../Button/AddButton";
+import AddButton from "../../Button/AddButton";
+import api from "@/services/api";
+import { useRequest } from "@/hooks/useRequest.hook";
 
 const style = {
   position: "absolute" as "absolute",
@@ -26,12 +28,12 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal() {
+export default function FormDrivers() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const CreateConsumerSchema = z.object({
+  const CreateDriverSchema = z.object({
     nome: z.string().nonempty("Campo obrigatório"),
     numeroHabilitacao: z.string().nonempty("Campo obrigatório"),
     categoriaHabilitacao: z.string().nonempty("Campo obrigatório"),
@@ -40,20 +42,29 @@ export default function BasicModal() {
       .transform((str) => new Date(str).toISOString()),
   });
 
-  type CreateConsumerFormData = z.infer<typeof CreateConsumerSchema>;
+  type CreateDriverFormData = z.infer<typeof CreateDriverSchema>;
 
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors, isDirty },
-  } = useForm<CreateConsumerFormData>({
-    resolver: zodResolver(CreateConsumerSchema),
+  } = useForm<CreateDriverFormData>({
+    resolver: zodResolver(CreateDriverSchema),
   });
 
-  async function createConsumer(data: CreateConsumerFormData) {
-    console.log(data);
-  }
+  const createDriver = async (
+    driverData: CreateDriverFormData
+  ): Promise<CreateDriverFormData> => {
+    const { data } = await api.post("Condutor", driverData);
+    await handleClose();
+    return data;
+  };
+
+  const { onSubmit } = useRequest<CreateDriverFormData>(
+    createDriver,
+    "drivers"
+  );
 
   return (
     <div>
@@ -71,13 +82,13 @@ export default function BasicModal() {
             component="h2"
             color="white"
           >
-            Novo
+            Novo condutor
           </Typography>
 
           <Box
             component="form"
             noValidate
-            onSubmit={handleSubmit(createConsumer)}
+            onSubmit={handleSubmit(onSubmit)}
             sx={{ mt: 1 }}
           >
             <TextField
@@ -101,6 +112,7 @@ export default function BasicModal() {
               label="Habilitação"
               id="numeroHabilitacao"
               variant="filled"
+              type="number"
             />
             <TextField
               {...register("categoriaHabilitacao")}
@@ -118,7 +130,7 @@ export default function BasicModal() {
               required
               fullWidth
               name="vencimentoHabilitacao"
-              id="categoriaHabilitacao"
+              id="vencimentoHabilitacao"
               type="date"
             />
 

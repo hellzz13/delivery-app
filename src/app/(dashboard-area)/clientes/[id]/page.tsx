@@ -2,7 +2,7 @@
 
 import { useDetails } from "@/hooks/useDetails.hook";
 import { Consumer } from "@/models/Consumer";
-import { api } from "@/services/api";
+import { get } from "@/services/api";
 import {
   Button,
   CircularProgress,
@@ -16,7 +16,7 @@ import { useRouter } from "next/navigation";
 
 export default function Page({ params }: { params: { id: string } }) {
   const { back } = useRouter();
-  const { data } = useDetails<Consumer>(api.getConsumerById, params.id);
+  const { data } = useDetails<Consumer>(get.getConsumerById, params.id);
 
   return (
     <Container style={{ marginTop: "110px" }}>

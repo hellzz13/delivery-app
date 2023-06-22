@@ -4,12 +4,12 @@ import TableBase from "@/components/TableBase";
 import { useTable } from "@/hooks/useTable.hook";
 import { Column } from "@/models/Columns";
 import { Delivery } from "@/models/Delivery";
-import { api } from "@/services/api";
+import { get } from "@/services/api";
 import { CircularProgress, Container, Paper, Typography } from "@mui/material";
 
 export default function DeliveryPage() {
   const { handleChangePage, handleChangeRowsPerPage, rows, page, rowsPerPage } =
-    useTable<Delivery>(api.getDelivery);
+    useTable<Delivery>(get.getDelivery);
 
   const columns: readonly Column[] = [
     { id: "kmInicial", label: "Km Inicial", minWidth: 50 },

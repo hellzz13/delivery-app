@@ -25,10 +25,6 @@ import { useRouter, usePathname } from "next/navigation";
 const drawerWidth = 240;
 
 interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
   children: React.ReactNode;
   window?: () => Window;
 }
@@ -47,28 +43,24 @@ export default function Sidebar(props: Props) {
   const sidebarItems = [
     {
       name: "Deslocamentos",
-      active: false,
       icon: "route",
       href: "/deslocamentos",
       current: pathname.startsWith("/deslocamento") && true,
     },
     {
       name: "Condutores",
-      active: false,
       icon: "person",
       href: "/condutores",
       current: pathname.startsWith("/condutor") && true,
     },
     {
       name: "Clientes",
-      active: false,
       icon: "folder_shared",
       href: "/clientes",
       current: pathname.startsWith("/cliente") && true,
     },
     {
       name: "Veiculos",
-      active: false,
       icon: "local_shipping",
       href: "/veiculos",
       current: pathname.startsWith("/veiculo") && true,
@@ -162,14 +154,13 @@ export default function Sidebar(props: Props) {
         }}
         aria-label="mailbox folders"
       >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Drawer
           container={container}
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true,
           }}
           sx={{
             display: { xs: "block", sm: "none" },

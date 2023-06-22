@@ -1,6 +1,7 @@
 import { ThemeContext } from "@/context/theme";
 import "./globals.css";
 import { Inter } from "next/font/google";
+import { QueryContext } from "@/context/query.context";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +24,9 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
-        <ThemeContext>{children}</ThemeContext>
+        <QueryContext>
+          <ThemeContext>{children}</ThemeContext>
+        </QueryContext>
       </body>
     </html>
   );

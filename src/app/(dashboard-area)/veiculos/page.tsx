@@ -1,16 +1,17 @@
 "use client";
 
-import BasicModal from "@/components/Modal";
+import FormVehicles from "@/components/Modal/FormVehicle";
 import TableBase from "@/components/TableBase";
+import ToastNotification from "@/components/ToastNotification";
 import { useTable } from "@/hooks/useTable.hook";
 import { Column } from "@/models/Columns";
 import { Vehicle } from "@/models/Vehicle";
-import { api } from "@/services/api";
+import { get } from "@/services/api";
 import { CircularProgress, Container, Paper, Typography } from "@mui/material";
 
 export default function VehiclesPage() {
   const { handleChangePage, handleChangeRowsPerPage, rows, page, rowsPerPage } =
-    useTable<Vehicle>(api.getVehicle);
+    useTable<Vehicle>(get.getVehicle, "vehicles");
 
   const columns: readonly Column[] = [
     { id: "placa", label: "Placa", minWidth: 50 },
@@ -37,7 +38,8 @@ export default function VehiclesPage() {
 
   return (
     <Container>
-      <BasicModal />
+      <FormVehicles />
+      <ToastNotification />
       <Paper sx={{ width: "100%", overflow: "hidden", marginTop: "100px" }}>
         {rows ? (
           rows.length >= 1 ? (

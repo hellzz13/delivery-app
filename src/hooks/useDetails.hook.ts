@@ -1,4 +1,3 @@
-import { api } from "@/services/api";
 import * as React from "react";
 
 export function useDetails<T>(

@@ -1,16 +1,17 @@
 "use client";
 
-import BasicModal from "@/components/Modal";
+import FormDrivers from "@/components/Modal/FormDrivers";
 import TableBase from "@/components/TableBase";
+import ToastNotification from "@/components/ToastNotification";
 import { useTable } from "@/hooks/useTable.hook";
 import { Column } from "@/models/Columns";
 import { Drivers } from "@/models/Drivers";
-import { api } from "@/services/api";
+import { get } from "@/services/api";
 import { CircularProgress, Container, Paper, Typography } from "@mui/material";
 
 export default function DriversPage() {
   const { handleChangePage, handleChangeRowsPerPage, rows, page, rowsPerPage } =
-    useTable<Drivers>(api.getDrivers);
+    useTable<Drivers>(get.getDrivers, "drivers");
 
   const columns: readonly Column[] = [
     { id: "nome", label: "Nome", minWidth: 50 },
@@ -37,7 +38,8 @@ export default function DriversPage() {
 
   return (
     <Container>
-      <BasicModal />
+      <FormDrivers />
+      <ToastNotification />
       <Paper sx={{ width: "100%", overflow: "hidden", marginTop: "100px" }}>
         {rows ? (
           rows.length >= 1 ? (
