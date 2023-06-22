@@ -32,8 +32,6 @@ export default function TableBase<T>({
   const { push } = useRouter();
   const pathname = usePathname();
 
-  console.log(pathname);
-
   return (
     <>
       <TableContainer sx={{ maxHeight: 440 }}>
@@ -55,7 +53,6 @@ export default function TableBase<T>({
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row: any) => {
-                console.log(typeof row);
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                     {columns.map((column) => {
@@ -67,7 +64,6 @@ export default function TableBase<T>({
                           sx={{ cursor: "pointer" }}
                           onClick={() => push(`${pathname}/${row.id}`)}
                         >
-                          {console.log(value)}
                           {column.id === "inicioDeslocamento" ||
                           column.id === "vencimentoHabilitacao"
                             ? dayjs(value).format("DD/MM/YYYY")

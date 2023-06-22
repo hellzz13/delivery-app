@@ -11,16 +11,19 @@ async function getDelivery(): Promise<Delivery[]> {
 
   return data;
 }
-
 async function getDeliveryById(id: string): Promise<Delivery> {
   const { data } = await axios.get<Delivery>(`${BASE_URL}Deslocamento/${id}`);
 
-  console.log(data);
   return data;
 }
 
 async function getDrivers(): Promise<Drivers[]> {
   const { data } = await axios.get<Drivers[]>(`${BASE_URL}Condutor`);
+
+  return data;
+}
+async function getDriversById(id: string): Promise<Drivers> {
+  const { data } = await axios.get<Drivers>(`${BASE_URL}Condutor/${id}`);
 
   return data;
 }
@@ -30,10 +33,21 @@ async function getConsumers(): Promise<Consumer[]> {
 
   return data;
 }
+async function getConsumerById(id: string): Promise<Consumer> {
+  const { data } = await axios.get<Consumer>(`${BASE_URL}Cliente/${id}`);
+
+  return data;
+}
 
 async function getVehicle(): Promise<Vehicle[]> {
   const { data } = await axios.get<Vehicle[]>(`${BASE_URL}Veiculo`);
 
+  return data;
+}
+async function getVehicleById(id: string): Promise<Vehicle> {
+  const { data } = await axios.get<Vehicle>(`${BASE_URL}Veiculo/${id}`);
+
+  console.log(data);
   return data;
 }
 
@@ -42,5 +56,9 @@ export const api = {
   getDrivers,
   getConsumers,
   getVehicle,
+
   getDeliveryById,
+  getDriversById,
+  getConsumerById,
+  getVehicleById,
 };
