@@ -9,7 +9,7 @@ import { CircularProgress, Container, Paper, Typography } from "@mui/material";
 
 export default function DeliveryPage() {
   const { handleChangePage, handleChangeRowsPerPage, rows, page, rowsPerPage } =
-    useTable<Delivery>(get.getDelivery);
+    useTable<Delivery>(get.getDelivery, "delivery");
 
   const columns: readonly Column[] = [
     { id: "kmInicial", label: "Km Inicial", minWidth: 50 },
