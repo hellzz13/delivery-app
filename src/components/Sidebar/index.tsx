@@ -48,7 +48,7 @@ export default function Sidebar(props: Props) {
       name: "Deslocamentos",
       active: false,
       icon: "route",
-      href: "/deslocamento",
+      href: "/deslocamentos",
     },
     { name: "Condutores", active: false, icon: "person", href: "/condutores" },
     {
@@ -57,7 +57,12 @@ export default function Sidebar(props: Props) {
       icon: "folder_shared",
       href: "/clientes",
     },
-    { name: "Veiculos", active: false, icon: "local_shipping", href: "#" },
+    {
+      name: "Veiculos",
+      active: false,
+      icon: "local_shipping",
+      href: "/veiculos",
+    },
   ];
 
   const drawer = (
@@ -67,7 +72,7 @@ export default function Sidebar(props: Props) {
           src="/logo.png"
           className="mx-auto"
           width={140}
-          height={140}
+          height={98}
           alt="Logo sistema Intruck"
         />
       </Toolbar>

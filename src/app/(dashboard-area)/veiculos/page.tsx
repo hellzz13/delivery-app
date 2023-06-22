@@ -4,32 +4,32 @@ import BasicModal from "@/components/Modal";
 import TableBase from "@/components/TableBase";
 import { useTable } from "@/hooks/useTable.hook";
 import { Column } from "@/models/Columns";
-import { Consumer } from "@/models/Consumer";
+import { Vehicle } from "@/models/Vehicle";
 import { api } from "@/services/api";
 import { CircularProgress, Container, Paper, Typography } from "@mui/material";
 
-export default function ConsumersPage() {
+export default function VehiclesPage() {
   const { handleChangePage, handleChangeRowsPerPage, rows, page, rowsPerPage } =
-    useTable<Consumer>(api.getConsumers);
+    useTable<Vehicle>(api.getVehicle);
 
   const columns: readonly Column[] = [
-    { id: "nome", label: "Nome", minWidth: 50 },
+    { id: "placa", label: "Placa", minWidth: 50 },
     {
-      id: "numeroDocumento",
-      label: "Documento",
+      id: "marcaModelo",
+      label: "Modelo",
       minWidth: 50,
       align: "center",
     },
     {
-      id: "tipoDocumento",
-      label: "Tipo Documento",
+      id: "anoFabricacao",
+      label: "Ano",
       minWidth: 70,
       align: "center",
     },
 
     {
-      id: "uf",
-      label: "Uf",
+      id: "kmAtual",
+      label: "Kilometragem",
       minWidth: 50,
       align: "center",
     },

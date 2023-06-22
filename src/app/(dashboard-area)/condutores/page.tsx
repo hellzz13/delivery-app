@@ -2,7 +2,7 @@
 
 import BasicModal from "@/components/Modal";
 import TableBase from "@/components/TableBase";
-import { useTable } from "@/components/TableBase/useTable.hook";
+import { useTable } from "@/hooks/useTable.hook";
 import { Column } from "@/models/Columns";
 import { Drivers } from "@/models/Drivers";
 import { api } from "@/services/api";
@@ -13,31 +13,24 @@ export default function DriversPage() {
     useTable<Drivers>(api.getDrivers);
 
   const columns: readonly Column[] = [
-    { id: "kmInicial", label: "Km Inicial", minWidth: 50 },
+    { id: "nome", label: "Nome", minWidth: 50 },
     {
-      id: "kmFinal",
-      label: "Km Final",
+      id: "numeroHabilitacao",
+      label: "Habilitação",
       minWidth: 50,
       align: "center",
     },
     {
-      id: "inicioDeslocamento",
-      label: "Data de partida",
+      id: "categoriaHabilitacao",
+      label: "Categoria CNH",
       minWidth: 70,
       align: "center",
     },
 
     {
-      id: "checkList",
-      label: "Status",
+      id: "vencimentoHabilitacao",
+      label: "Vencimento CNH",
       minWidth: 50,
-      align: "center",
-    },
-    { id: "motivo", label: "motivo", minWidth: 60 },
-    {
-      id: "observacao",
-      label: "Observação",
-      minWidth: 70,
       align: "center",
     },
   ];

@@ -1,7 +1,7 @@
 "use client";
 
 import TableBase from "@/components/TableBase";
-import { useTable } from "@/components/TableBase/useTable.hook";
+import { useTable } from "@/hooks/useTable.hook";
 import { Column } from "@/models/Columns";
 import { Delivery } from "@/models/Delivery";
 import { api } from "@/services/api";

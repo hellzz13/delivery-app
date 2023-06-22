@@ -32,6 +32,9 @@ Finally, open [http://localhost:3000](http://localhost:3000/) with your browser 
 - React 18.2.0
 - TailwindCss 3.3.2
 - Typescript 5.1.3
+- Axios 1.4.0
+- Dayjs 1.11.8
+
 <!-- -   React Hook Form 7.43.9
 - Zod 3.21.4 -->
 

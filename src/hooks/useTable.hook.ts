@@ -21,7 +21,7 @@ export function useTable<T>(fetchData: () => Promise<T[]>) {
 
   React.useEffect(() => {
     fetchData().then((res) => setData(res));
-  }, []);
+  }, [fetchData]);
 
   return {
     page,
