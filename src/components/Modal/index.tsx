@@ -7,6 +7,10 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { TextField } from "@mui/material";
 
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import AddButton from "../Button/AddButton";
 
 const style = {
@@ -14,7 +18,8 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: "100%",
+  maxWidth: 600,
   bgcolor: "#19212C",
   border: "2px solid #000",
   boxShadow: 24,
@@ -26,6 +31,30 @@ export default function BasicModal() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const CreateConsumerSchema = z.object({
+    nome: z.string().nonempty("Campo obrigatório"),
+    numeroHabilitacao: z.string().nonempty("Campo obrigatório"),
+    categoriaHabilitacao: z.string().nonempty("Campo obrigatório"),
+    vencimentoHabilitacao: z
+      .string()
+      .transform((str) => new Date(str).toISOString()),
+  });
+
+  type CreateConsumerFormData = z.infer<typeof CreateConsumerSchema>;
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors, isDirty },
+  } = useForm<CreateConsumerFormData>({
+    resolver: zodResolver(CreateConsumerSchema),
+  });
+
+  async function createConsumer(data: CreateConsumerFormData) {
+    console.log(data);
+  }
+
   return (
     <div>
       <AddButton onClick={handleOpen} />
@@ -36,45 +65,67 @@ export default function BasicModal() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
+          <Typography
+            id="modal-modal-title"
+            variant="h6"
+            component="h2"
+            color="white"
+          >
+            Novo
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+
           <Box
             component="form"
             noValidate
-            // onSubmit={handleSubmit}
+            onSubmit={handleSubmit(createConsumer)}
             sx={{ mt: 1 }}
           >
             <TextField
+              {...register("nome")}
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="name"
+              label="Nome"
+              name="nome"
+              autoComplete="nome"
               variant="filled"
               autoFocus
             />
             <TextField
+              {...register("numeroHabilitacao")}
               margin="normal"
               required
               fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
+              name="numeroHabilitacao"
+              label="Habilitação"
+              id="numeroHabilitacao"
               variant="filled"
-              autoComplete="current-password"
+            />
+            <TextField
+              {...register("categoriaHabilitacao")}
+              margin="normal"
+              required
+              fullWidth
+              name="categoriaHabilitacao"
+              label="Categoria"
+              id="categoriaHabilitacao"
+              variant="filled"
+            />
+            <TextField
+              {...register("vencimentoHabilitacao")}
+              margin="normal"
+              required
+              fullWidth
+              name="vencimentoHabilitacao"
+              id="categoriaHabilitacao"
+              type="date"
             />
 
             <Button
               type="submit"
               fullWidth
-              variant="outlined"
+              variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
               Cadastrar
