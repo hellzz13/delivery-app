@@ -20,7 +20,7 @@ import Typography from "@mui/material/Typography";
 
 import Image from "next/image";
 import { Icon } from "@mui/material";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 const drawerWidth = 240;
 
@@ -38,6 +38,7 @@ export default function Sidebar(props: Props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const router = useRouter();
+  const pathname = usePathname();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -49,19 +50,28 @@ export default function Sidebar(props: Props) {
       active: false,
       icon: "route",
       href: "/deslocamentos",
+      current: pathname.startsWith("/deslocamento") && true,
     },
-    { name: "Condutores", active: false, icon: "person", href: "/condutores" },
+    {
+      name: "Condutores",
+      active: false,
+      icon: "person",
+      href: "/condutores",
+      current: pathname.startsWith("/condutor") && true,
+    },
     {
       name: "Clientes",
       active: false,
       icon: "folder_shared",
       href: "/clientes",
+      current: pathname.startsWith("/cliente") && true,
     },
     {
       name: "Veiculos",
       active: false,
       icon: "local_shipping",
       href: "/veiculos",
+      current: pathname.startsWith("/veiculo") && true,
     },
   ];
 
@@ -86,7 +96,11 @@ export default function Sidebar(props: Props) {
               onClick={() => router.push(item.href)}
             >
               <ListItemButton
-                sx={{ color: "#fff", ":hover": { backgroundColor: "#1e2535" } }}
+                sx={{
+                  color: "#fff",
+                  ":hover": { backgroundColor: "#1e2535" },
+                  backgroundColor: item.current ? "#1e2535" : "transparent",
+                }}
               >
                 <ListItemIcon>
                   <Icon color="primary">{item.icon}</Icon>

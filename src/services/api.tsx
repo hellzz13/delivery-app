@@ -6,6 +6,7 @@ import { Vehicle } from "@/models/Vehicle";
 
 const BASE_URL = "https://api-deslocamento.herokuapp.com/api/v1/";
 
+// get
 async function getDelivery(): Promise<Delivery[]> {
   const { data } = await axios.get<Delivery[]>(`${BASE_URL}Deslocamento`);
 
@@ -47,9 +48,10 @@ async function getVehicle(): Promise<Vehicle[]> {
 async function getVehicleById(id: string): Promise<Vehicle> {
   const { data } = await axios.get<Vehicle>(`${BASE_URL}Veiculo/${id}`);
 
-  console.log(data);
   return data;
 }
+
+// post
 
 export const api = {
   getDelivery,
