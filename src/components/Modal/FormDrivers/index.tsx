@@ -5,7 +5,12 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { FormControl, InputLabel, TextField } from "@mui/material";
+import {
+  CircularProgress,
+  FormControl,
+  InputLabel,
+  TextField,
+} from "@mui/material";
 
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -63,7 +68,7 @@ export default function FormDrivers() {
     return data;
   };
 
-  const { onSubmit } = useRequest<CreateDriverFormData>(
+  const { onSubmit, isLoading } = useRequest<CreateDriverFormData>(
     createDriver,
     "drivers"
   );
@@ -169,7 +174,7 @@ export default function FormDrivers() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Cadastrar
+              {isLoading ? <CircularProgress /> : "Cadastrar"}
             </Button>
           </Box>
         </Box>

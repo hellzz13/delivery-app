@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { TextField } from "@mui/material";
+import { CircularProgress, TextField } from "@mui/material";
 
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -67,7 +67,7 @@ export default function FormVehicles() {
     return data;
   };
 
-  const { onSubmit } = useRequest<CreateVehicleFormData>(
+  const { onSubmit, isLoading } = useRequest<CreateVehicleFormData>(
     createVehicle,
     "vehicles"
   );
@@ -171,7 +171,7 @@ export default function FormVehicles() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Cadastrar
+              {isLoading ? <CircularProgress /> : "Cadastrar"}
             </Button>
           </Box>
         </Box>

@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { Grid, TextField } from "@mui/material";
+import { CircularProgress, Grid, TextField } from "@mui/material";
 
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -65,7 +65,7 @@ export default function FormConsumers() {
     return data;
   };
 
-  const { onSubmit } = useRequest<CreateConsumerFormData>(
+  const { onSubmit, isLoading } = useRequest<CreateConsumerFormData>(
     createConsumer,
     "consumers"
   );
@@ -248,7 +248,7 @@ export default function FormConsumers() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Cadastrar
+              {isLoading ? <CircularProgress /> : "Cadastrar"}
             </Button>
           </Box>
         </Box>

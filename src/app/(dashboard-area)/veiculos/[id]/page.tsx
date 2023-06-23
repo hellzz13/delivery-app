@@ -1,8 +1,9 @@
 "use client";
 
+import DeleteAlert from "@/components/Modal/DeleteAlert";
 import { useDetails } from "@/hooks/useDetails.hook";
 import { Vehicle } from "@/models/Vehicle";
-import { get } from "@/services/api";
+import { get, remove } from "@/services/api";
 import {
   Button,
   CircularProgress,
@@ -68,15 +69,12 @@ export default function Page({ params }: { params: { id: string } }) {
               </Button>
             </Grid>
             <Grid item xs={2} sm={4} md={4}>
-              <Button
-                variant="contained"
-                color="error"
-                onClick={() => {}}
-                sx={{ marginTop: "10px" }}
-                fullWidth
-              >
-                Excluir
-              </Button>
+              <DeleteAlert
+                name="Excluir"
+                id={params.id}
+                urlRoute="Veiculo"
+                remove={remove.deleteData}
+              />
             </Grid>
           </Grid>
         </>

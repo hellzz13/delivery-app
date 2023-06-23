@@ -55,7 +55,11 @@ async function getVehicleById(id: string): Promise<Vehicle> {
   return data;
 }
 
-// post
+// DELETE
+
+async function deleteData(id: string, urlRoute: string) {
+  await api.delete(`${urlRoute}/${id}`, { data: { id: id } });
+}
 
 export const get = {
   getDelivery,
@@ -67,4 +71,8 @@ export const get = {
   getDriversById,
   getConsumerById,
   getVehicleById,
+};
+
+export const remove = {
+  deleteData,
 };

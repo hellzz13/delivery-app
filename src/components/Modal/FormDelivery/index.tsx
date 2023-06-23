@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import {
+  CircularProgress,
   FormControl,
   Grid,
   InputLabel,
@@ -82,8 +83,6 @@ export default function FormDelivery() {
   const {
     register,
     handleSubmit,
-    setValue,
-    resetField,
     reset,
     formState: { errors, isDirty },
   } = useForm<CreateDeliveryFormData>({
@@ -103,7 +102,7 @@ export default function FormDelivery() {
     return data;
   };
 
-  const { onSubmit } = useRequest<CreateDeliveryFormData>(
+  const { onSubmit, isLoading } = useRequest<CreateDeliveryFormData>(
     createDelivery,
     "delivery"
   );
@@ -347,7 +346,7 @@ export default function FormDelivery() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Cadastrar
+              {isLoading ? <CircularProgress /> : "Cadastrar"}
             </Button>
           </Box>
         </Box>

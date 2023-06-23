@@ -28,7 +28,5 @@ export function useRequest<T>(
     mutate(data);
   };
 
-  console.log(isLoading);
-
-  return { onSubmit };
+  return { onSubmit, isLoading };
 }
