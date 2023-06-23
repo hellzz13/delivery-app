@@ -1,6 +1,8 @@
 "use client";
 
+import FormDelivery from "@/components/Modal/FormDelivery";
 import TableBase from "@/components/TableBase";
+import ToastNotification from "@/components/ToastNotification";
 import { useTable } from "@/hooks/useTable.hook";
 import { Column } from "@/models/Columns";
 import { Delivery } from "@/models/Delivery";
@@ -43,6 +45,8 @@ export default function DeliveryPage() {
 
   return (
     <Container>
+      <FormDelivery />
+      <ToastNotification />
       <Paper sx={{ width: "100%", overflow: "hidden", marginTop: "100px" }}>
         {rows ? (
           rows.length >= 1 ? (

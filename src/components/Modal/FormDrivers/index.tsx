@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { TextField } from "@mui/material";
+import { FormControl, InputLabel, TextField } from "@mui/material";
 
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -37,9 +37,9 @@ export default function FormDrivers() {
     nome: z.string().nonempty("Campo obrigatório"),
     numeroHabilitacao: z.string().nonempty("Campo obrigatório"),
     categoriaHabilitacao: z.string().nonempty("Campo obrigatório"),
-    vencimentoHabilitacao: z
-      .string()
-      .transform((str) => new Date(str).toISOString()),
+    vencimentoHabilitacao: z.string().transform((str) => {
+      return new Date(str).toISOString();
+    }),
   });
 
   type CreateDriverFormData = z.infer<typeof CreateDriverSchema>;
@@ -124,15 +124,22 @@ export default function FormDrivers() {
               id="categoriaHabilitacao"
               variant="filled"
             />
-            <TextField
-              {...register("vencimentoHabilitacao")}
-              margin="normal"
-              required
-              fullWidth
-              name="vencimentoHabilitacao"
-              id="vencimentoHabilitacao"
-              type="date"
-            />
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">
+                Inicio deslocamento
+              </InputLabel>
+
+              <TextField
+                {...register("vencimentoHabilitacao")}
+                margin="normal"
+                required
+                fullWidth
+                name="vencimentoHabilitacao"
+                id="vencimentoHabilitacao"
+                type="date"
+                variant="filled"
+              />
+            </FormControl>
 
             <Button
               type="submit"

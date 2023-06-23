@@ -11,17 +11,14 @@ export function useRequest<T>(
   const { mutate, isLoading } = useMutation(fetchData, {
     onSuccess: (data) => {
       console.log(data);
-      toast.success("Condutor cadastrado com sucesso!", {
+      toast.success("Cadastrado realizado com sucesso!", {
         position: toast.POSITION.TOP_RIGHT,
       });
     },
-    onError: () => {
-      toast.error(
-        "Não foi possível cadastrar o condutor. Verifique os dados!",
-        {
-          position: toast.POSITION.TOP_RIGHT,
-        }
-      );
+    onError: (data: { response: { data: string } }) => {
+      toast.error(data.response.data, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
     },
     onSettled: () => {
       queryClient.invalidateQueries([queryKey]);
