@@ -1,4 +1,3 @@
-import * as React from "react";
 import { useQueryClient, useMutation } from "react-query";
 import { toast } from "react-toastify";
 

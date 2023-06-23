@@ -50,6 +50,7 @@ export default function FormConsumers() {
     register,
     handleSubmit,
     setValue,
+    reset,
     formState: { errors, isDirty },
   } = useForm<CreateConsumerFormData>({
     resolver: zodResolver(CreateConsumerSchema),
@@ -60,6 +61,7 @@ export default function FormConsumers() {
   ): Promise<CreateConsumerFormData> => {
     const { data } = await api.post("Cliente", consumerData);
     await handleClose();
+    reset({});
     return data;
   };
 
@@ -112,6 +114,11 @@ export default function FormConsumers() {
                   variant="filled"
                   autoFocus
                 />
+                {errors.nome && (
+                  <span className="text-red-error text-sm">
+                    {errors.nome.message}
+                  </span>
+                )}
               </Grid>
               <Grid item sm={12} md={6}>
                 <TextField
@@ -124,6 +131,11 @@ export default function FormConsumers() {
                   id="numeroDocumento"
                   variant="filled"
                 />
+                {errors.numeroDocumento && (
+                  <span className="text-red-error text-sm">
+                    {errors.numeroDocumento.message}
+                  </span>
+                )}
               </Grid>
               <Grid item sm={12} md={6}>
                 <TextField
@@ -136,6 +148,11 @@ export default function FormConsumers() {
                   id="tipoDocumento"
                   variant="filled"
                 />
+                {errors.tipoDocumento && (
+                  <span className="text-red-error text-sm">
+                    {errors.tipoDocumento.message}
+                  </span>
+                )}
               </Grid>
               <Grid item sm={12} md={8}>
                 <TextField
@@ -148,6 +165,11 @@ export default function FormConsumers() {
                   id="logradouro"
                   variant="filled"
                 />
+                {errors.logradouro && (
+                  <span className="text-red-error text-sm">
+                    {errors.logradouro.message}
+                  </span>
+                )}
               </Grid>
               <Grid item sm={12} md={4}>
                 <TextField
@@ -161,6 +183,11 @@ export default function FormConsumers() {
                   type="number"
                   variant="filled"
                 />
+                {errors.numero && (
+                  <span className="text-red-error text-sm">
+                    {errors.numero.message}
+                  </span>
+                )}
               </Grid>
               <Grid item sm={12} md={4}>
                 <TextField
@@ -173,6 +200,11 @@ export default function FormConsumers() {
                   id="bairro"
                   variant="filled"
                 />
+                {errors.bairro && (
+                  <span className="text-red-error text-sm">
+                    {errors.bairro.message}
+                  </span>
+                )}
               </Grid>
               <Grid item sm={12} md={4}>
                 <TextField
@@ -185,6 +217,11 @@ export default function FormConsumers() {
                   id="cidade"
                   variant="filled"
                 />
+                {errors.cidade && (
+                  <span className="text-red-error text-sm">
+                    {errors.cidade.message}
+                  </span>
+                )}
               </Grid>
               <Grid item sm={12} md={4}>
                 <TextField
@@ -197,6 +234,11 @@ export default function FormConsumers() {
                   id="uf"
                   variant="filled"
                 />
+                {errors.uf && (
+                  <span className="text-red-error text-sm">
+                    {errors.uf.message}
+                  </span>
+                )}
               </Grid>
             </Grid>
 

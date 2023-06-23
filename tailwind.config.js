@@ -20,6 +20,7 @@ module.exports = {
       primary: "#8B6CFC",
       dark: "#19212C",
       main: "#1e2535",
+      "red-error": "#ff3333",
     },
   },
 

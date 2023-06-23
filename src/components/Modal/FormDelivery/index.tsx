@@ -58,7 +58,7 @@ export default function FormDelivery() {
       .nonempty("Campo obrigatório")
       .transform((str) => Number(str)),
     inicioDeslocamento: z.string().transform((str) => {
-      return new Date(str).toISOString();
+      return str && new Date(str).toISOString();
     }),
     checkList: z.string().nonempty("Campo obrigatório"),
     motivo: z.string().nonempty("Campo obrigatório"),
@@ -83,6 +83,8 @@ export default function FormDelivery() {
     register,
     handleSubmit,
     setValue,
+    resetField,
+    reset,
     formState: { errors, isDirty },
   } = useForm<CreateDeliveryFormData>({
     resolver: zodResolver(CreateDeliverySchema),
@@ -97,6 +99,7 @@ export default function FormDelivery() {
       deliveryData
     );
     await handleClose();
+    reset({});
     return data;
   };
 
@@ -158,6 +161,11 @@ export default function FormDelivery() {
                   autoFocus
                   type="number"
                 />
+                {errors.kmInicial && (
+                  <span className="text-red-error text-sm">
+                    {errors.kmInicial.message}
+                  </span>
+                )}
               </Grid>
 
               <Grid item xs={2} sm={4} md={6}>
@@ -176,6 +184,11 @@ export default function FormDelivery() {
                     fullWidth
                   />
                 </FormControl>
+                {errors.inicioDeslocamento && (
+                  <span className="text-red-error text-sm">
+                    {errors.inicioDeslocamento.message}
+                  </span>
+                )}
               </Grid>
               <Grid item xs={2} sm={4} md={6}>
                 <TextField
@@ -189,6 +202,11 @@ export default function FormDelivery() {
                   autoComplete="checkList"
                   variant="filled"
                 />
+                {errors.checkList && (
+                  <span className="text-red-error text-sm">
+                    {errors.checkList.message}
+                  </span>
+                )}
               </Grid>
               <Grid item xs={2} sm={4} md={6}>
                 <TextField
@@ -202,6 +220,11 @@ export default function FormDelivery() {
                   autoComplete="motivo"
                   variant="filled"
                 />
+                {errors.motivo && (
+                  <span className="text-red-error text-sm">
+                    {errors.motivo.message}
+                  </span>
+                )}
               </Grid>
               <Grid item xs={2} sm={4} md={6}>
                 <TextField
@@ -215,6 +238,11 @@ export default function FormDelivery() {
                   autoComplete="observacao"
                   variant="filled"
                 />
+                {errors.observacao && (
+                  <span className="text-red-error text-sm">
+                    {errors.observacao.message}
+                  </span>
+                )}
               </Grid>
             </Grid>
             {/* bloco 2 */}
@@ -247,6 +275,11 @@ export default function FormDelivery() {
                       ))}
                   </Select>
                 </FormControl>
+                {errors.idCliente && (
+                  <span className="text-red-error text-sm">
+                    {errors.idCliente.message}
+                  </span>
+                )}
               </Grid>
               <Grid item xs={2} sm={4} md={4}>
                 <FormControl fullWidth>
@@ -272,6 +305,11 @@ export default function FormDelivery() {
                       ))}
                   </Select>
                 </FormControl>
+                {errors.idCondutor && (
+                  <span className="text-red-error text-sm">
+                    {errors.idCondutor.message}
+                  </span>
+                )}
               </Grid>
               <Grid item xs={2} sm={4} md={4}>
                 <FormControl fullWidth>
@@ -295,6 +333,11 @@ export default function FormDelivery() {
                       ))}
                   </Select>
                 </FormControl>
+                {errors.idVeiculo && (
+                  <span className="text-red-error text-sm">
+                    {errors.idVeiculo.message}
+                  </span>
+                )}
               </Grid>
             </Grid>
 

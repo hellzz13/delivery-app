@@ -52,6 +52,7 @@ export default function FormVehicles() {
     register,
     handleSubmit,
     setValue,
+    reset,
     formState: { errors, isDirty },
   } = useForm<CreateVehicleFormData>({
     resolver: zodResolver(CreateVehicleSchema),
@@ -62,6 +63,7 @@ export default function FormVehicles() {
   ): Promise<CreateVehicleFormData> => {
     const { data } = await api.post("Veiculo", vehicleData);
     await handleClose();
+    reset({});
     return data;
   };
 
@@ -109,6 +111,11 @@ export default function FormVehicles() {
               variant="filled"
               autoFocus
             />
+            {errors.placa && (
+              <span className="text-red-error text-sm">
+                {errors.placa.message}
+              </span>
+            )}
             <TextField
               {...register("marcaModelo")}
               margin="normal"
@@ -119,6 +126,11 @@ export default function FormVehicles() {
               id="marcaModelo"
               variant="filled"
             />
+            {errors.marcaModelo && (
+              <span className="text-red-error text-sm">
+                {errors.marcaModelo.message}
+              </span>
+            )}
 
             <TextField
               {...register("anoFabricacao")}
@@ -131,6 +143,11 @@ export default function FormVehicles() {
               variant="filled"
               type="number"
             />
+            {errors.anoFabricacao && (
+              <span className="text-red-error text-sm">
+                {errors.anoFabricacao.message}
+              </span>
+            )}
             <TextField
               {...register("kmAtual")}
               margin="normal"
@@ -142,6 +159,11 @@ export default function FormVehicles() {
               variant="filled"
               type="number"
             />
+            {errors.kmAtual && (
+              <span className="text-red-error text-sm">
+                {errors.kmAtual.message}
+              </span>
+            )}
 
             <Button
               type="submit"

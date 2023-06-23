@@ -38,7 +38,7 @@ export default function FormDrivers() {
     numeroHabilitacao: z.string().nonempty("Campo obrigatório"),
     categoriaHabilitacao: z.string().nonempty("Campo obrigatório"),
     vencimentoHabilitacao: z.string().transform((str) => {
-      return new Date(str).toISOString();
+      return str && new Date(str).toISOString();
     }),
   });
 
@@ -48,6 +48,7 @@ export default function FormDrivers() {
     register,
     handleSubmit,
     setValue,
+    reset,
     formState: { errors, isDirty },
   } = useForm<CreateDriverFormData>({
     resolver: zodResolver(CreateDriverSchema),
@@ -58,6 +59,7 @@ export default function FormDrivers() {
   ): Promise<CreateDriverFormData> => {
     const { data } = await api.post("Condutor", driverData);
     await handleClose();
+    reset({});
     return data;
   };
 
@@ -103,6 +105,11 @@ export default function FormDrivers() {
               variant="filled"
               autoFocus
             />
+            {errors.nome && (
+              <span className="text-red-error text-sm">
+                {errors.nome.message}
+              </span>
+            )}
             <TextField
               {...register("numeroHabilitacao")}
               margin="normal"
@@ -114,6 +121,11 @@ export default function FormDrivers() {
               variant="filled"
               type="number"
             />
+            {errors.numeroHabilitacao && (
+              <span className="text-red-error text-sm">
+                {errors.numeroHabilitacao.message}
+              </span>
+            )}
             <TextField
               {...register("categoriaHabilitacao")}
               margin="normal"
@@ -124,6 +136,11 @@ export default function FormDrivers() {
               id="categoriaHabilitacao"
               variant="filled"
             />
+            {errors.categoriaHabilitacao && (
+              <span className="text-red-error text-sm">
+                {errors.categoriaHabilitacao.message}
+              </span>
+            )}
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">
                 Inicio deslocamento
@@ -140,6 +157,11 @@ export default function FormDrivers() {
                 variant="filled"
               />
             </FormControl>
+            {errors.vencimentoHabilitacao && (
+              <span className="text-red-error text-sm">
+                {errors.vencimentoHabilitacao.message}
+              </span>
+            )}
 
             <Button
               type="submit"
