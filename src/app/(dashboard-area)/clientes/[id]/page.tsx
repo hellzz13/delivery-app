@@ -3,30 +3,45 @@
 import DeleteAlert from "@/components/Modal/DeleteAlert";
 import { useDetails } from "@/hooks/useDetails.hook";
 import { Consumer } from "@/models/Consumer";
-import { get, remove } from "@/services/api";
+import { get, remove, update } from "@/services/api";
 import {
   Button,
   CircularProgress,
   Container,
   Divider,
   Grid,
+  Icon,
+  IconButton,
   Paper,
   Typography,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Page({ params }: { params: { id: string } }) {
   const { back } = useRouter();
   const { data } = useDetails<Consumer>(get.getConsumerById, params.id);
 
+  useEffect(() => {
+    const values = {
+      nome: "nome alterado agora",
+    };
+    update.changeData<Partial<Consumer>>(values, params.id, "Cliente");
+  }, []);
+
   return (
     <Container style={{ marginTop: "110px" }}>
       {data ? (
         <>
-          <Paper sx={{ padding: "10px" }}>
-            <Typography variant="h1" fontSize={25} paddingY={2}>
-              Cliente: {data.id}
-            </Typography>
+          <Paper sx={{ paddingX: "20px", paddingY: "30px" }}>
+            <div className="flex justify-between items-center">
+              <Typography variant="h1" fontSize={25} paddingY={2}>
+                Cliente: {data.id}
+              </Typography>
+              <IconButton size="medium">
+                <Icon>edit</Icon>
+              </IconButton>
+            </div>
             <Divider />
 
             <Grid

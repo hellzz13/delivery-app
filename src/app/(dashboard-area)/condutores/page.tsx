@@ -22,7 +22,7 @@ export default function DriversPage() {
       align: "center",
     },
     {
-      id: "categoriaHabilitacao",
+      id: "catergoriaHabilitacao",
       label: "Categoria CNH",
       minWidth: 70,
       align: "center",

@@ -12,7 +12,7 @@ export interface Column {
     | "idCliente"
     | "nome"
     | "numeroHabilitacao"
-    | "categoriaHabilitacao"
+    | "catergoriaHabilitacao"
     | "vencimentoHabilitacao"
     | "numeroDocumento"
     | "tipoDocumento"

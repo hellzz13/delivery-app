@@ -61,6 +61,16 @@ async function deleteData(id: string, urlRoute: string) {
   await api.delete(`${urlRoute}/${id}`, { data: { id: id } });
 }
 
+// PUT
+
+async function changeData<T>(values: T, id: string, urlRoute: string) {
+  const data = {
+    ...values,
+    id: Number(id),
+  };
+  await api.put(`${urlRoute}/${id}`, data);
+}
+
 export const get = {
   getDelivery,
   getDrivers,
@@ -75,4 +85,8 @@ export const get = {
 
 export const remove = {
   deleteData,
+};
+
+export const update = {
+  changeData,
 };

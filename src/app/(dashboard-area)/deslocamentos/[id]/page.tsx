@@ -24,8 +24,8 @@ export default function Page({ params }: { params: { id: string } }) {
     <Container style={{ marginTop: "110px" }}>
       {data ? (
         <>
-          <Paper sx={{ padding: "10px" }}>
-            <Typography variant="h1" fontSize={25} paddingY={2}>
+          <Paper sx={{ paddingX: "20px", paddingY: "30px" }}>
+            <Typography variant="h1" fontSize={25} paddingY={1}>
               Deslocamento: {data.id}
             </Typography>
             <Divider />
@@ -50,7 +50,9 @@ export default function Page({ params }: { params: { id: string } }) {
               </Grid>
               <Grid item xs={2} sm={4} md={4}>
                 <span className="font-bold">Fim Deslocamento:</span>{" "}
-                {dayjs(data.fimDeslocamento).format("DD/MM/YYYY")}
+                {data.fimDeslocamento
+                  ? dayjs(data.fimDeslocamento).format("DD/MM/YYYY")
+                  : "Em rota"}
               </Grid>
               <Grid item xs={2} sm={4} md={4}>
                 <span className="font-bold">Status: </span>
