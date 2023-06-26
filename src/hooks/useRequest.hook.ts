@@ -9,7 +9,6 @@ export function useRequest<T>(
 
   const { mutate, isLoading } = useMutation(fetchData, {
     onSuccess: (data) => {
-      console.log(data);
       toast.success("Cadastrado realizado com sucesso!", {
         position: toast.POSITION.TOP_RIGHT,
       });

@@ -49,10 +49,8 @@ export default function FormConsumers() {
   const {
     register,
     handleSubmit,
-    setValue,
     reset,
-
-    formState: { errors, isDirty },
+    formState: { errors },
   } = useForm<CreateConsumerFormData>({
     resolver: zodResolver(CreateConsumerSchema),
   });
