@@ -1,5 +1,6 @@
 export interface Column {
   id:
+    | "id"
     | "motivo"
     | "kmInicial"
     | "kmFinal"

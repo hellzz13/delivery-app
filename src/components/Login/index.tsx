@@ -41,14 +41,18 @@ export default function Login() {
             alignItems: "center",
           }}
         >
-          <div className="bg-dark py-3 w-60 h-60 flex justify-center items-center rounded-full">
+          <Box
+            sx={{ background: "#19212C", padding: "40px" }}
+            borderRadius={100}
+          >
             <Image
-              width={200}
-              height={200}
+              width={190}
+              height={120}
               src="/logo.png"
               alt="logo da aplicação"
             />
-          </div>
+          </Box>
+
           <Box
             component="form"
             noValidate
@@ -60,7 +64,7 @@ export default function Login() {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label="Email"
               name="email"
               autoComplete="email"
               autoFocus
@@ -70,7 +74,7 @@ export default function Login() {
               required
               fullWidth
               name="password"
-              label="Password"
+              label="Senha"
               type="password"
               id="password"
               autoComplete="current-password"
@@ -79,18 +83,13 @@ export default function Login() {
             <Button
               type="submit"
               fullWidth
-              variant="outlined"
+              variant="contained"
               sx={{ mt: 3, mb: 2 }}
               onClick={() => router.push("/")}
             >
               Entrar
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Esqueceu sua senha?
-                </Link>
-              </Grid>
               <Grid item>
                 <Link href="#" variant="body2">
                   {"Não é cadastrado? Crie sua conta!"}

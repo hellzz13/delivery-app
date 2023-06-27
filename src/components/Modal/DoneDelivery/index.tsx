@@ -59,7 +59,7 @@ export default function DoneDelivery({ id, name }: IDoneDelivery) {
             component="h2"
             color="white"
           >
-            Tem certeza que deseja excluir?
+            Tem certeza que concluir este deslocamento?
           </Typography>
 
           <Box component="form" noValidate sx={{ mt: 1 }}>

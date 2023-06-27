@@ -14,6 +14,7 @@ export default function DeliveryPage() {
     useTable<Delivery>(get.getDelivery, "delivery");
 
   const columns: readonly Column[] = [
+    { id: "id", label: "ID", minWidth: 50 },
     { id: "kmInicial", label: "Km Inicial", minWidth: 50 },
 
     {
