@@ -16,8 +16,8 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { redirect, useRouter } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
 
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -26,18 +26,17 @@ import { zodResolver } from "@hookform/resolvers/zod";
 export default function Page({ params }: { params: { id: string } }) {
   const { back } = useRouter();
   const { data } = useDetails<Consumer>(get.getConsumerById, params.id);
-
   const [isEditable, setIsEditable] = useState(false);
 
   const UpdateCosumerSchema = z.object({
     nome: z.string().nonempty("Campo obrigatório"),
-    numeroDocumento: z.string().nonempty("Campo obrigatório"),
-    tipoDocumento: z.string().nonempty("Campo obrigatório"),
-    // logradouro: z.string().nonempty("Campo obrigatório"),
-    // numero: z.string().nonempty("Campo obrigatório"),
-    // bairro: z.string().nonempty("Campo obrigatório"),
-    // cidade: z.string().nonempty("Campo obrigatório"),
-    // uf: z.string().nonempty("Campo obrigatório"),
+    numeroDocumento: z.string(),
+    tipoDocumento: z.string(),
+    logradouro: z.string().nonempty("Campo obrigatório"),
+    numero: z.string().nonempty("Campo obrigatório"),
+    bairro: z.string().nonempty("Campo obrigatório"),
+    cidade: z.string().nonempty("Campo obrigatório"),
+    uf: z.string().nonempty("Campo obrigatório"),
   });
 
   type UpdateConsumerFormData = z.infer<typeof UpdateCosumerSchema>;
@@ -52,15 +51,23 @@ export default function Page({ params }: { params: { id: string } }) {
     resolver: zodResolver(UpdateCosumerSchema),
   });
 
-  function handleUpdate(values: UpdateConsumerFormData) {
-    update.changeData<Partial<Consumer>>(values, params.id, "Cliente");
-    setIsEditable(true);
-  }
+  const handleUpdateConsumers = useCallback(
+    (values: UpdateConsumerFormData) => {
+      update.changeData<Partial<Consumer>>(values, params.id, "Cliente");
+      setIsEditable(false);
+    },
+    [params.id]
+  );
 
   useEffect(() => {
     data?.nome && setValue("nome", data.nome);
     data?.numeroDocumento && setValue("numeroDocumento", data.numeroDocumento);
     data?.tipoDocumento && setValue("tipoDocumento", data.tipoDocumento);
+    data?.logradouro && setValue("logradouro", data.logradouro);
+    data?.numero && setValue("numero", data.numero);
+    data?.bairro && setValue("bairro", data.bairro);
+    data?.cidade && setValue("cidade", data.cidade);
+    data?.uf && setValue("uf", data.uf);
   }, [data, setValue]);
 
   return (
@@ -70,14 +77,14 @@ export default function Page({ params }: { params: { id: string } }) {
           <Paper
             sx={{ paddingX: "20px", paddingY: "30px" }}
             component="form"
-            onSubmit={handleSubmit(handleUpdate)}
+            onSubmit={handleSubmit(handleUpdateConsumers)}
           >
             <div className="flex justify-between items-center">
               <Typography variant="h1" fontSize={25} paddingY={2}>
                 Cliente: {data.id}
               </Typography>
               <div>
-                {!isEditable && (
+                {isEditable && (
                   <IconButton
                     size="medium"
                     type="submit"
@@ -104,7 +111,7 @@ export default function Page({ params }: { params: { id: string } }) {
               columns={{ xs: 4, sm: 8, md: 12 }}
             >
               <Grid item xs={2} sm={4} md={4}>
-                {isEditable ? (
+                {!isEditable ? (
                   <>
                     <label className="font-bold">Nome </label>
                     <div className="h-12 w-full flex items-center">
@@ -116,6 +123,9 @@ export default function Page({ params }: { params: { id: string } }) {
                     {" "}
                     <TextField
                       {...register("nome")}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
                       size="small"
                       margin="normal"
                       name="nome"
@@ -131,7 +141,7 @@ export default function Page({ params }: { params: { id: string } }) {
                 )}
               </Grid>
               <Grid item xs={2} sm={4} md={4}>
-                {isEditable ? (
+                {!isEditable ? (
                   <>
                     <label className="font-bold">Documento </label>
                     <div className="h-12 w-full flex items-center">
@@ -142,7 +152,10 @@ export default function Page({ params }: { params: { id: string } }) {
                   <div>
                     {" "}
                     <TextField
-                      {...register("numeroDocumento")}
+                      {...register("numero")}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
                       size="small"
                       margin="normal"
                       name="numeroDocumento"
@@ -151,17 +164,14 @@ export default function Page({ params }: { params: { id: string } }) {
                       variant="filled"
                       fullWidth
                       type="number"
-                      error={!!errors.numeroDocumento}
-                      helperText={
-                        errors.numeroDocumento && errors.numeroDocumento.message
-                      }
+                      disabled
                     />
                   </div>
                 )}
               </Grid>
 
               <Grid item xs={2} sm={4} md={4}>
-                {isEditable ? (
+                {!isEditable ? (
                   <>
                     <label className="font-bold">Tipo de documento </label>
                     <div className="h-12 w-full flex items-center">
@@ -173,6 +183,9 @@ export default function Page({ params }: { params: { id: string } }) {
                     {" "}
                     <TextField
                       {...register("tipoDocumento")}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
                       size="small"
                       margin="normal"
                       name="tipoDocumento"
@@ -180,29 +193,158 @@ export default function Page({ params }: { params: { id: string } }) {
                       id="tipoDocumento"
                       variant="filled"
                       fullWidth
-                      error={!!errors.tipoDocumento}
+                      disabled
+                    />
+                  </div>
+                )}
+              </Grid>
+              <Grid item xs={2} sm={4} md={4}>
+                {!isEditable ? (
+                  <>
+                    <label className="font-bold">Rua </label>
+                    <div className="h-12 w-full flex items-center">
+                      <Typography>{data.logradouro}</Typography>
+                    </div>
+                  </>
+                ) : (
+                  <div>
+                    {" "}
+                    <TextField
+                      {...register("logradouro")}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      size="small"
+                      margin="normal"
+                      name="logradouro"
+                      label="Rua"
+                      id="logradouro"
+                      variant="filled"
+                      fullWidth
+                      error={!!errors.logradouro}
                       helperText={
-                        errors.tipoDocumento && errors.tipoDocumento.message
+                        errors.logradouro && errors.logradouro.message
                       }
                     />
                   </div>
                 )}
               </Grid>
               <Grid item xs={2} sm={4} md={4}>
-                <label className="font-bold">Rua:</label> {data.logradouro}
+                {!isEditable ? (
+                  <>
+                    <label className="font-bold">Número </label>
+                    <div className="h-12 w-full flex items-center">
+                      <Typography>{data.numero}</Typography>
+                    </div>
+                  </>
+                ) : (
+                  <div>
+                    {" "}
+                    <TextField
+                      {...register("numero")}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      size="small"
+                      margin="normal"
+                      name="numero"
+                      label="Número"
+                      id="numero"
+                      variant="filled"
+                      fullWidth
+                      type="number"
+                      error={!!errors.numero}
+                      helperText={errors.numero && errors.numero.message}
+                    />
+                  </div>
+                )}
               </Grid>
               <Grid item xs={2} sm={4} md={4}>
-                <label className="font-bold">Número: </label>
-                {data.numero}
+                {!isEditable ? (
+                  <>
+                    <label className="font-bold">Bairro </label>
+                    <div className="h-12 w-full flex items-center">
+                      <Typography>{data.bairro}</Typography>
+                    </div>
+                  </>
+                ) : (
+                  <div>
+                    {" "}
+                    <TextField
+                      {...register("bairro")}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      size="small"
+                      margin="normal"
+                      name="bairro"
+                      label="Bairro"
+                      id="bairro"
+                      variant="filled"
+                      fullWidth
+                      error={!!errors.bairro}
+                      helperText={errors.bairro && errors.bairro.message}
+                    />
+                  </div>
+                )}
               </Grid>
               <Grid item xs={2} sm={4} md={4}>
-                <label className="font-bold">Bairro:</label> {data.bairro}
+                {!isEditable ? (
+                  <>
+                    <label className="font-bold">Cidade </label>
+                    <div className="h-12 w-full flex items-center">
+                      <Typography>{data.cidade}</Typography>
+                    </div>
+                  </>
+                ) : (
+                  <div>
+                    {" "}
+                    <TextField
+                      {...register("cidade")}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      size="small"
+                      margin="normal"
+                      name="cidade"
+                      label="Cidade"
+                      id="cidade"
+                      variant="filled"
+                      fullWidth
+                      error={!!errors.cidade}
+                      helperText={errors.cidade && errors.cidade.message}
+                    />
+                  </div>
+                )}
               </Grid>
               <Grid item xs={2} sm={4} md={4}>
-                <label className="font-bold">Cidade:</label> {data.cidade}
-              </Grid>
-              <Grid item xs={2} sm={4} md={4}>
-                <label className="font-bold">UF:</label> {data.uf}
+                {!isEditable ? (
+                  <>
+                    <label className="font-bold">UF </label>
+                    <div className="h-12 w-full flex items-center">
+                      <Typography>{data.uf}</Typography>
+                    </div>
+                  </>
+                ) : (
+                  <div>
+                    {" "}
+                    <TextField
+                      {...register("uf")}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      size="small"
+                      margin="normal"
+                      name="uf"
+                      label="UF"
+                      id="uf"
+                      variant="filled"
+                      fullWidth
+                      error={!!errors.uf}
+                      helperText={errors.uf && errors.uf.message}
+                    />
+                  </div>
+                )}
               </Grid>
             </Grid>
           </Paper>

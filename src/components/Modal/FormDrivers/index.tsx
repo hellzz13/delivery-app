@@ -19,6 +19,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import AddButton from "../../Button/AddButton";
 import api from "@/services/api";
 import { useRequest } from "@/hooks/useRequest.hook";
+import { useCallback } from "react";
 
 const style = {
   position: "absolute" as "absolute",
@@ -54,19 +55,20 @@ export default function FormDrivers() {
     handleSubmit,
     setValue,
     reset,
-    formState: { errors, isDirty },
+    formState: { errors },
   } = useForm<CreateDriverFormData>({
     resolver: zodResolver(CreateDriverSchema),
   });
 
-  const createDriver = async (
-    driverData: CreateDriverFormData
-  ): Promise<CreateDriverFormData> => {
-    const { data } = await api.post("Condutor", driverData);
-    await handleClose();
-    reset({});
-    return data;
-  };
+  const createDriver = useCallback(
+    async (driverData: CreateDriverFormData): Promise<CreateDriverFormData> => {
+      const { data } = await api.post("Condutor", driverData);
+      await handleClose();
+      reset({});
+      return data;
+    },
+    [reset]
+  );
 
   const { onSubmit, isLoading } = useRequest<CreateDriverFormData>(
     createDriver,

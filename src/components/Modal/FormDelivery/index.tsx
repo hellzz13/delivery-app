@@ -26,6 +26,7 @@ import { useRequest } from "@/hooks/useRequest.hook";
 import { Consumer } from "@/models/Consumer";
 import { Vehicle } from "@/models/Vehicle";
 import { Drivers } from "@/models/Drivers";
+import { useCallback } from "react";
 
 const style = {
   position: "absolute" as "absolute",
@@ -54,10 +55,10 @@ export default function FormDelivery() {
   const [idCliente, setIdCliente] = React.useState("");
 
   const CreateDeliverySchema = z.object({
-    kmInicial: z
-      .string()
-      .nonempty("Campo obrigatório")
-      .transform((str) => Number(str)),
+    kmInicial: z.number({
+      required_error: "Campo obrigatório",
+      invalid_type_error: "Digite um valor",
+    }),
     inicioDeslocamento: z.string().transform((str) => {
       return str && new Date(str).toISOString();
     }),
@@ -84,23 +85,26 @@ export default function FormDelivery() {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isDirty },
+    setValue,
+    formState: { errors },
   } = useForm<CreateDeliveryFormData>({
     resolver: zodResolver(CreateDeliverySchema),
   });
 
-  const createDelivery = async (
-    deliveryData: CreateDeliveryFormData
-  ): Promise<CreateDeliveryFormData> => {
-    console.log(deliveryData);
-    const { data } = await api.post(
-      "Deslocamento/IniciarDeslocamento/",
-      deliveryData
-    );
-    await handleClose();
-    reset({});
-    return data;
-  };
+  const createDelivery = useCallback(
+    async (
+      deliveryData: CreateDeliveryFormData
+    ): Promise<CreateDeliveryFormData> => {
+      const { data } = await api.post(
+        "Deslocamento/IniciarDeslocamento/",
+        deliveryData
+      );
+      await handleClose();
+      reset({});
+      return data;
+    },
+    [reset]
+  );
 
   const { onSubmit, isLoading } = useRequest<CreateDeliveryFormData>(
     createDelivery,
@@ -108,10 +112,11 @@ export default function FormDelivery() {
   );
 
   React.useEffect(() => {
+    setValue("inicioDeslocamento", Date());
     get.getConsumers().then((res) => setConsumers(res));
     get.getVehicle().then((res) => setVehicles(res));
     get.getDrivers().then((res) => setDrivers(res));
-  }, []);
+  }, [setValue]);
 
   console.log(errors);
   return (
@@ -148,7 +153,7 @@ export default function FormDelivery() {
             >
               <Grid item xs={2} sm={4} md={6}>
                 <TextField
-                  {...register("kmInicial")}
+                  {...register("kmInicial", { valueAsNumber: true })}
                   margin="normal"
                   required
                   fullWidth
@@ -159,6 +164,7 @@ export default function FormDelivery() {
                   variant="filled"
                   autoFocus
                   type="number"
+                  error={!!errors.kmInicial}
                 />
                 {errors.kmInicial && (
                   <span className="text-red-error text-sm">
@@ -167,7 +173,7 @@ export default function FormDelivery() {
                 )}
               </Grid>
 
-              <Grid item xs={2} sm={4} md={6}>
+              {/* <Grid item xs={2} sm={4} md={6}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">
                     Inicio deslocamento
@@ -179,8 +185,8 @@ export default function FormDelivery() {
                     variant="filled"
                     type="date"
                     margin="normal"
-                    required
                     fullWidth
+                    error={!!errors.inicioDeslocamento}
                   />
                 </FormControl>
                 {errors.inicioDeslocamento && (
@@ -188,7 +194,7 @@ export default function FormDelivery() {
                     {errors.inicioDeslocamento.message}
                   </span>
                 )}
-              </Grid>
+              </Grid> */}
               <Grid item xs={2} sm={4} md={6}>
                 <TextField
                   {...register("checkList")}
@@ -200,13 +206,16 @@ export default function FormDelivery() {
                   name="checkList"
                   autoComplete="checkList"
                   variant="filled"
+                  error={!!errors.checkList}
                 />
+
                 {errors.checkList && (
                   <span className="text-red-error text-sm">
                     {errors.checkList.message}
                   </span>
                 )}
               </Grid>
+
               <Grid item xs={2} sm={4} md={6}>
                 <TextField
                   {...register("motivo")}
@@ -218,6 +227,7 @@ export default function FormDelivery() {
                   name="motivo"
                   autoComplete="motivo"
                   variant="filled"
+                  error={!!errors.motivo}
                 />
                 {errors.motivo && (
                   <span className="text-red-error text-sm">
@@ -236,6 +246,7 @@ export default function FormDelivery() {
                   name="observacao"
                   autoComplete="observacao"
                   variant="filled"
+                  error={!!errors.observacao}
                 />
                 {errors.observacao && (
                   <span className="text-red-error text-sm">
@@ -265,6 +276,7 @@ export default function FormDelivery() {
                       setIdCliente(id);
                     }}
                     sx={{ color: "white" }}
+                    error={!!errors.idCliente}
                   >
                     {consumers &&
                       consumers.map((item) => (
@@ -295,6 +307,7 @@ export default function FormDelivery() {
                       setIdCondutor(event.target.value);
                     }}
                     sx={{ color: "white" }}
+                    error={!!errors.idCondutor}
                   >
                     {drivers &&
                       drivers.map((item) => (
@@ -323,6 +336,7 @@ export default function FormDelivery() {
                       setIdVeiculo(event.target.value);
                     }}
                     sx={{ color: "white" }}
+                    error={!!errors.idVeiculo}
                   >
                     {vehicles &&
                       vehicles.map((item) => (

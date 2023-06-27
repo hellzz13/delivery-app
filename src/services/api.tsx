@@ -68,6 +68,7 @@ async function changeData<T>(values: T, id: string, urlRoute: string) {
     ...values,
     id: Number(id),
   };
+
   await api.put(`${urlRoute}/${id}`, data);
 }
 

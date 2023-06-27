@@ -15,12 +15,7 @@ export default function DeliveryPage() {
 
   const columns: readonly Column[] = [
     { id: "kmInicial", label: "Km Inicial", minWidth: 50 },
-    {
-      id: "kmFinal",
-      label: "Km Final",
-      minWidth: 50,
-      align: "center",
-    },
+
     {
       id: "inicioDeslocamento",
       label: "Data de partida",

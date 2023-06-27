@@ -1,15 +1,18 @@
 "use client";
 
 import DeleteAlert from "@/components/Modal/DeleteAlert";
+import DoneDelivery from "@/components/Modal/DoneDelivery";
 import { useDetails } from "@/hooks/useDetails.hook";
 import { Delivery } from "@/models/Delivery";
-import { get, remove } from "@/services/api";
+import { get, remove, update } from "@/services/api";
 import {
   Button,
   CircularProgress,
   Container,
   Divider,
   Grid,
+  Icon,
+  IconButton,
   Paper,
   Typography,
 } from "@mui/material";
@@ -25,9 +28,18 @@ export default function Page({ params }: { params: { id: string } }) {
       {data ? (
         <>
           <Paper sx={{ paddingX: "20px", paddingY: "30px" }}>
-            <Typography variant="h1" fontSize={25} paddingY={1}>
-              Deslocamento: {data.id}
-            </Typography>
+            <div className="flex justify-between items-center">
+              <Typography variant="h1" fontSize={25} paddingY={2}>
+                Deslocamento: {data.id}
+              </Typography>
+              <div>
+                {!data.fimDeslocamento ? (
+                  <DoneDelivery id={params.id} name="Concluir" />
+                ) : (
+                  <Typography variant="subtitle1">Concluido</Typography>
+                )}
+              </div>
+            </div>
             <Divider />
 
             <Grid
@@ -41,8 +53,8 @@ export default function Page({ params }: { params: { id: string } }) {
                 {data.kmInicial}
               </Grid>
               <Grid item xs={2} sm={4} md={4}>
-                <span className="font-bold">Kilometragem Final:</span>{" "}
-                {data.kmFinal}
+                <span className="font-bold">Finalizado:</span>{" "}
+                {data.kmFinal ? "Finalizado" : "Em rota"}
               </Grid>
               <Grid item xs={2} sm={4} md={4}>
                 <span className="font-bold">Inicio Deslocamento:</span>{" "}
