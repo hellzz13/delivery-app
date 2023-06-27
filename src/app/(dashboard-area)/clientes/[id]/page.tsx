@@ -50,19 +50,17 @@ export default function Page({ params }: { params: { id: string } }) {
     formState: { errors },
   } = useForm<UpdateConsumerFormData>({
     resolver: zodResolver(UpdateCosumerSchema),
-    defaultValues: {
-      nome: data && data.nome,
-    },
   });
 
   function handleUpdate(values: UpdateConsumerFormData) {
     update.changeData<Partial<Consumer>>(values, params.id, "Cliente");
-
     setIsEditable(true);
   }
 
   useEffect(() => {
     data?.nome && setValue("nome", data.nome);
+    data?.numeroDocumento && setValue("numeroDocumento", data.numeroDocumento);
+    data?.tipoDocumento && setValue("tipoDocumento", data.tipoDocumento);
   }, [data, setValue]);
 
   return (
@@ -126,12 +124,9 @@ export default function Page({ params }: { params: { id: string } }) {
                       variant="filled"
                       fullWidth
                       autoFocus
+                      error={!!errors.nome}
+                      helperText={errors.nome && errors.nome.message}
                     />
-                    {errors.nome && (
-                      <span className="text-red-error text-sm">
-                        {errors.nome.message}
-                      </span>
-                    )}
                   </div>
                 )}
               </Grid>
@@ -155,17 +150,16 @@ export default function Page({ params }: { params: { id: string } }) {
                       id="numeroDocumento"
                       variant="filled"
                       fullWidth
-                      value={data.numeroDocumento}
                       type="number"
+                      error={!!errors.numeroDocumento}
+                      helperText={
+                        errors.numeroDocumento && errors.numeroDocumento.message
+                      }
                     />
-                    {errors.numeroDocumento && (
-                      <span className="text-red-error text-sm">
-                        {errors.numeroDocumento.message}
-                      </span>
-                    )}
                   </div>
                 )}
               </Grid>
+
               <Grid item xs={2} sm={4} md={4}>
                 {isEditable ? (
                   <>
@@ -186,13 +180,11 @@ export default function Page({ params }: { params: { id: string } }) {
                       id="tipoDocumento"
                       variant="filled"
                       fullWidth
-                      value={data.tipoDocumento}
+                      error={!!errors.tipoDocumento}
+                      helperText={
+                        errors.tipoDocumento && errors.tipoDocumento.message
+                      }
                     />
-                    {errors.tipoDocumento && (
-                      <span className="text-red-error text-sm">
-                        {errors.tipoDocumento.message}
-                      </span>
-                    )}
                   </div>
                 )}
               </Grid>
