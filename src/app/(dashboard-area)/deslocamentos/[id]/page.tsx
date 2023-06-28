@@ -23,7 +23,7 @@ export default function Page({ params }: { params: { id: string } }) {
   const { data } = useDetails<Delivery>(
     get.getDeliveryById,
     params.id,
-    "deliverys"
+    "delivery"
   );
 
   return (

@@ -23,10 +23,10 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import TruckAnimation from "@/components/TruckLoading";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 
 export default function Page({ params }: { params: { id: string } }) {
-  const { back, push } = useRouter();
+  const { back, push, replace } = useRouter();
   const { data } = useDetails<Drivers>(
     get.getDriversById,
     params.id,
@@ -63,6 +63,8 @@ export default function Page({ params }: { params: { id: string } }) {
         dayjs(data.vencimentoHabilitacao).format("YYYY-MM-DD")
       );
   }, [data, setValue]);
+
+  const queryClient = useQueryClient();
 
   const handleUpdateDrivers = useCallback(
     (values: UpdateDriverFormData) => {

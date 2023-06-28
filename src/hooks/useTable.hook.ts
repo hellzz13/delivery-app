@@ -26,7 +26,7 @@ export function useTable<T>(fetchData: () => Promise<T[]>, queryKey: string) {
       async () => {
         return fetchData().then((res) => setData(res));
       },
-      //verify this time
+
       { staleTime: 1000, refetchInterval: 30000 }
     );
   }
