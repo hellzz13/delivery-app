@@ -4,13 +4,11 @@ import FormDelivery from "@/components/Modal/FormDelivery";
 import TableBase from "@/components/TableBase";
 import ToastNotification from "@/components/ToastNotification";
 import TruckAnimation from "@/components/TruckLoading";
-import { Context } from "@/context/AuthContexts";
 import { useTable } from "@/hooks/useTable.hook";
 import { Column } from "@/models/Columns";
 import { Delivery } from "@/models/Delivery";
 import { get } from "@/services/api";
 import { Container, Paper, Typography } from "@mui/material";
-import { useContext, useEffect } from "react";
 
 export default function DeliveryPage() {
   const { handleChangePage, handleChangeRowsPerPage, rows, page, rowsPerPage } =
@@ -19,6 +17,7 @@ export default function DeliveryPage() {
   const columns: readonly Column[] = [
     { id: "id", label: "ID", minWidth: 50 },
     { id: "kmInicial", label: "Km Inicial", minWidth: 50 },
+    { id: "fimDeslocamento", label: "Progresso", minWidth: 50 },
 
     {
       id: "inicioDeslocamento",

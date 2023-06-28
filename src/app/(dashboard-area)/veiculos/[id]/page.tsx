@@ -24,7 +24,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import TruckAnimation from "@/components/TruckLoading";
 
 export default function Page({ params }: { params: { id: string } }) {
-  const { back } = useRouter();
+  const { back, push } = useRouter();
   const { data } = useDetails<Vehicle>(
     get.getVehicleById,
     params.id,
@@ -68,8 +68,9 @@ export default function Page({ params }: { params: { id: string } }) {
     (values: UpdateVehicleFormData) => {
       update.changeData<Partial<Vehicle>>(values, params.id, "Veiculo");
       setIsEditable(false);
+      push("/veiculos");
     },
-    [params.id]
+    [params.id, push]
   );
 
   return (

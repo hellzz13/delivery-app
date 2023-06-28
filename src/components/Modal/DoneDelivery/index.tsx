@@ -11,6 +11,7 @@ import api, { remove, update } from "@/services/api";
 import { useRouter } from "next/navigation";
 import { style } from "./style";
 import { useCallback } from "react";
+import { toast } from "react-toastify";
 
 interface IDoneDelivery {
   name: string;
@@ -27,11 +28,12 @@ export default function DoneDelivery({ id, name }: IDoneDelivery) {
     const values = {
       id: id,
       fimDeslocamento: new Date().toISOString(),
-      kmFinal: 200000,
+      kmFinal: 2000000000,
     };
 
     await api.put(`Deslocamento/${id}/EncerrarDeslocamento`, values);
     await back();
+    toast.success("Concluido com sucesso!");
   }, [back, id]);
   return (
     <span>

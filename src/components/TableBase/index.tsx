@@ -65,9 +65,12 @@ export default function TableBase<T>({
                           onClick={() => push(`${pathname}/${row.id}`)}
                         >
                           {column.id === "inicioDeslocamento" ||
-                          column.id === "vencimentoHabilitacao" ||
-                          column.id === "fimDeslocamento"
+                          column.id === "vencimentoHabilitacao"
                             ? dayjs(value).format("DD/MM/YYYY")
+                            : column.id === "fimDeslocamento"
+                            ? value
+                              ? "Concluido"
+                              : "Em andamento"
                             : value}
                         </TableCell>
                       );

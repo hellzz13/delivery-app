@@ -108,7 +108,7 @@ export default function FormConsumers() {
               spacing={{ xs: 2, md: 2 }}
               columns={{ xs: 4, sm: 8, md: 12 }}
             >
-              <Grid item xs={2} sm={8} md={12}>
+              <Grid item xs={2} sm={8} md={6}>
                 <TextField
                   {...register("nome")}
                   margin="normal"
@@ -152,23 +152,7 @@ export default function FormConsumers() {
                   )}
                 />
               </Grid>
-              {/* <Grid item xs={2} sm={8} md={6}>
-                <TextField
-                  {...register("tipoDocumento")}
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="tipoDocumento"
-                  label="Tipo de documentos"
-                  id="tipoDocumento"
-                  variant="filled"
-                />
-                {errors.tipoDocumento && (
-                  <span className="text-red-error text-sm">
-                    {errors.tipoDocumento.message}
-                  </span>
-                )}
-              </Grid> */}
+
               <Grid item xs={2} sm={8} md={8}>
                 <TextField
                   {...register("logradouro")}

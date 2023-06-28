@@ -24,7 +24,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import TruckAnimation from "@/components/TruckLoading";
 
 export default function Page({ params }: { params: { id: string } }) {
-  const { back } = useRouter();
+  const { back, push } = useRouter();
   const { data } = useDetails<Consumer>(
     get.getConsumerById,
     params.id,
@@ -59,8 +59,9 @@ export default function Page({ params }: { params: { id: string } }) {
     (values: UpdateConsumerFormData) => {
       update.changeData<Partial<Consumer>>(values, params.id, "Cliente");
       setIsEditable(false);
+      push("/clientes");
     },
-    [params.id]
+    [params.id, push]
   );
 
   useEffect(() => {
