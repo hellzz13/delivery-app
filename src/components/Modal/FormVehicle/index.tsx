@@ -21,7 +21,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: "100%",
-  maxWidth: 600,
+  maxWidth: 400,
   bgcolor: "#19212C",
   border: "2px solid #000",
   boxShadow: 24,
@@ -51,9 +51,8 @@ export default function FormVehicles() {
   const {
     register,
     handleSubmit,
-    setValue,
     reset,
-    formState: { errors, isDirty },
+    formState: { errors },
   } = useForm<CreateVehicleFormData>({
     resolver: zodResolver(CreateVehicleSchema),
   });
@@ -71,8 +70,6 @@ export default function FormVehicles() {
     createVehicle,
     "vehicles"
   );
-
-  console.log(errors);
 
   return (
     <div>

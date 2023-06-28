@@ -77,6 +77,7 @@ export default function FormConsumers() {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        sx={{ overflow: "auto" }}
       >
         <Box sx={style}>
           <Typography
@@ -100,7 +101,7 @@ export default function FormConsumers() {
               spacing={{ xs: 2, md: 2 }}
               columns={{ xs: 4, sm: 8, md: 12 }}
             >
-              <Grid item sm={12} md={12}>
+              <Grid item xs={2} sm={8} md={12}>
                 <TextField
                   {...register("nome")}
                   margin="normal"
@@ -119,7 +120,7 @@ export default function FormConsumers() {
                   </span>
                 )}
               </Grid>
-              <Grid item sm={12} md={6}>
+              <Grid item xs={2} sm={8} md={6}>
                 <TextField
                   {...register("numeroDocumento")}
                   margin="normal"
@@ -136,7 +137,7 @@ export default function FormConsumers() {
                   </span>
                 )}
               </Grid>
-              <Grid item sm={12} md={6}>
+              <Grid item xs={2} sm={8} md={6}>
                 <TextField
                   {...register("tipoDocumento")}
                   margin="normal"
@@ -153,7 +154,7 @@ export default function FormConsumers() {
                   </span>
                 )}
               </Grid>
-              <Grid item sm={12} md={8}>
+              <Grid item xs={2} sm={8} md={8}>
                 <TextField
                   {...register("logradouro")}
                   margin="normal"
@@ -170,7 +171,7 @@ export default function FormConsumers() {
                   </span>
                 )}
               </Grid>
-              <Grid item sm={12} md={4}>
+              <Grid item xs={2} sm={8} md={4}>
                 <TextField
                   {...register("numero")}
                   margin="normal"
@@ -188,7 +189,7 @@ export default function FormConsumers() {
                   </span>
                 )}
               </Grid>
-              <Grid item sm={12} md={4}>
+              <Grid item xs={2} sm={8} md={4}>
                 <TextField
                   {...register("bairro")}
                   margin="normal"
@@ -205,7 +206,7 @@ export default function FormConsumers() {
                   </span>
                 )}
               </Grid>
-              <Grid item sm={12} md={4}>
+              <Grid item xs={2} sm={8} md={4}>
                 <TextField
                   {...register("cidade")}
                   margin="normal"
@@ -222,7 +223,7 @@ export default function FormConsumers() {
                   </span>
                 )}
               </Grid>
-              <Grid item sm={12} md={4}>
+              <Grid item xs={2} sm={8} md={4}>
                 <TextField
                   {...register("uf")}
                   margin="normal"

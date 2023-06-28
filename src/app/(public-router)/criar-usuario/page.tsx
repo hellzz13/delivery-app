@@ -13,30 +13,45 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useContext, useEffect, useState } from "react";
-import { Context } from "@/context/AuthContexts";
-import { Typography } from "@mui/material";
+
+import api from "../../../services/authFakeApi";
+import { toast } from "react-toastify";
 
 export default function CreateUser() {
-  const router = useRouter();
-
-  const { handleLogin } = useContext(Context);
-
   const CreateUserSchema = z.object({
     username: z.string().nonempty("Campo obrigatório"),
     password: z.string().nonempty("Campo obrigatório"),
     confirmPassword: z.string().nonempty("Campo obrigatório"),
   });
 
+  const { push } = useRouter();
+
   type CreateUserFormData = z.infer<typeof CreateUserSchema>;
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<CreateUserFormData>({
     resolver: zodResolver(CreateUserSchema),
   });
+
+  async function handleRegister(data: CreateUserFormData) {
+    try {
+      await api.post("/register", {
+        name: data.username,
+        username: data.username,
+        password: data.password,
+      });
+      reset();
+      toast.success("Cadastro efetuado com sucesso!");
+      push("/");
+    } catch (e: any) {
+      toast.error(e.message);
+      console.log(e);
+    }
+  }
 
   return (
     <main className="container flex justify-center items-center mx-auto h-screen">
@@ -68,7 +83,7 @@ export default function CreateUser() {
           <Box
             component="form"
             noValidate
-            onSubmit={handleSubmit(handleLogin)}
+            onSubmit={handleSubmit(handleRegister)}
             sx={{ mt: 1 }}
           >
             <TextField
@@ -104,7 +119,7 @@ export default function CreateUser() {
               fullWidth
               name="confirmPassword"
               label="Confirmar Senha"
-              type="confirmPassword"
+              type="password"
               id="confirmPassword"
               autoComplete="current-confirmPassword"
               error={!!errors.confirmPassword}
@@ -119,7 +134,7 @@ export default function CreateUser() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Entrar
+              Cadastrar
             </Button>
             <Grid container>
               <Grid item>

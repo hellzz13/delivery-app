@@ -53,7 +53,6 @@ export default function FormDrivers() {
   const {
     register,
     handleSubmit,
-    setValue,
     reset,
     formState: { errors },
   } = useForm<CreateDriverFormData>({
@@ -83,6 +82,7 @@ export default function FormDrivers() {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        sx={{ overflow: "auto" }}
       >
         <Box sx={style}>
           <Typography
