@@ -16,6 +16,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import api from "../../../services/authFakeApi";
 import { toast } from "react-toastify";
+import { useCallback } from "react";
 
 export default function CreateUser() {
   const CreateUserSchema = z.object({
@@ -37,21 +38,23 @@ export default function CreateUser() {
     resolver: zodResolver(CreateUserSchema),
   });
 
-  async function handleRegister(data: CreateUserFormData) {
-    try {
-      await api.post("/register", {
-        name: data.username,
-        username: data.username,
-        password: data.password,
-      });
-      reset();
-      toast.success("Cadastro efetuado com sucesso!");
-      push("/");
-    } catch (e: any) {
-      toast.error(e.message);
-      console.log(e);
-    }
-  }
+  const handleRegister = useCallback(
+    async function handleRegister(data: CreateUserFormData) {
+      try {
+        await api.post("/register", {
+          name: data.username,
+          username: data.username,
+          password: data.password,
+        });
+        reset();
+        toast.success("Cadastro efetuado com sucesso!");
+        push("/");
+      } catch (e: any) {
+        toast.error(e.message);
+      }
+    },
+    [push, reset]
+  );
 
   return (
     <main className="container flex justify-center items-center mx-auto h-screen max-w-md">

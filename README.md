@@ -1,30 +1,34 @@
 # Delivery App
 
-About the project
+Sobre o Projeto
 
-The project is a interface that interact with API REST of Deslocamento to create, read, update and delete posts (CRUD).
+O projeto é um interface criada para gerenciar uma API de deslocamento, onde podemos fazer o CRUD dos dados fornecidos pela mesma.
 
 ## **Getting Started**
 
-First, clone the project:
+Primeiro, clone o projeto localmente:
 
 ```bash
-git clone https://github.com/hellzz13/posts-web.git
+git clone https://github.com/hellzz13/delivery-app.git
 ```
 
-Then copying and accessing the application directory, you will need to run the command below to install the project's dependencies
+Em seguida acesse a pasta do projeto pelo terminal, e rode o comando abaixo para instalar a dependencias.
 
 ```bash
 npm install
 ```
 
-After that, run the development server:
+Depois, rode o comando para dar start no server local:
 
 ```bash
 npm run dev
 ```
 
-Finally, open [http://localhost:3000](http://localhost:3000/) with your browser to see the result.
+Por fim, abra [http://localhost:3000](http://localhost:3000/) em seu navegador para visualizar o projeto.
+
+## **Proximos passos**
+
+O projeto é um MPV onde podemos validar a ideia de deslocamento. Abaixo podemos listar algumas melhorias a serem aplicadas futuramente:
 
 ## **Tools and libs:**
 
@@ -34,14 +38,11 @@ Finally, open [http://localhost:3000](http://localhost:3000/) with your browser 
 - Typescript 5.1.3
 - Axios 1.4.0
 - Dayjs 1.11.8
-
-<!-- -   React Hook Form 7.43.9
-- Zod 3.21.4 -->
+- React Hook Form 7.43.9
+- Zod 3.21.4
 
 ## **Deploy on Vercel**
 
-The project can be access on the link:
+O projeto pode ser acessado no link:
 
-In progress...
-
-<!-- [Post web](https://) -->
+[Projeto InTruck Delivery](https://delivery-app-hellzz13.vercel.app/)
