@@ -16,7 +16,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useContext } from "react";
 import { Context } from "@/context/AuthContexts";
 
-export default function Login() {
+export default function CreateAccountPage() {
   const router = useRouter();
 
   const { handleLogin } = useContext(Context);

@@ -71,7 +71,7 @@ export default function Page({ params }: { params: { id: string } }) {
   return (
     <Container style={{ marginTop: "110px" }}>
       {data ? (
-        <>
+        <div>
           <Paper
             sx={{ paddingX: "20px", paddingY: "30px" }}
             component="form"
@@ -110,12 +110,12 @@ export default function Page({ params }: { params: { id: string } }) {
             >
               <Grid item xs={2} sm={4} md={4}>
                 {!isEditable ? (
-                  <>
+                  <span>
                     <label className="font-bold">Placa </label>
                     <div className="h-12 w-full flex items-center">
                       <Typography>{data.placa}</Typography>
                     </div>
-                  </>
+                  </span>
                 ) : (
                   <div>
                     <TextField
@@ -139,12 +139,12 @@ export default function Page({ params }: { params: { id: string } }) {
               </Grid>
               <Grid item xs={2} sm={4} md={4}>
                 {!isEditable ? (
-                  <>
+                  <span>
                     <label className="font-bold">Modelo </label>
                     <div className="h-12 w-full flex items-center">
                       <Typography>{data.marcaModelo}</Typography>
                     </div>
-                  </>
+                  </span>
                 ) : (
                   <div>
                     <TextField
@@ -169,12 +169,12 @@ export default function Page({ params }: { params: { id: string } }) {
               </Grid>
               <Grid item xs={2} sm={4} md={4}>
                 {!isEditable ? (
-                  <>
+                  <span>
                     <label className="font-bold">Kilometragem </label>
                     <div className="h-12 w-full flex items-center">
                       <Typography>{data.kmAtual}</Typography>
                     </div>
-                  </>
+                  </span>
                 ) : (
                   <div>
                     <TextField
@@ -198,12 +198,12 @@ export default function Page({ params }: { params: { id: string } }) {
               </Grid>
               <Grid item xs={2} sm={4} md={4}>
                 {!isEditable ? (
-                  <>
+                  <span>
                     <label className="font-bold">Ano </label>
                     <div className="h-12 w-full flex items-center">
                       <Typography>{data.anoFabricacao}</Typography>
                     </div>
-                  </>
+                  </span>
                 ) : (
                   <div>
                     <TextField
@@ -256,7 +256,7 @@ export default function Page({ params }: { params: { id: string } }) {
               />
             </Grid>
           </Grid>
-        </>
+        </div>
       ) : (
         <div className="py-16 w-full flex justify-center items-center">
           <CircularProgress />

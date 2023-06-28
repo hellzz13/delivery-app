@@ -24,7 +24,7 @@ export default function Page({ params }: { params: { id: string } }) {
   return (
     <Container style={{ marginTop: "110px" }}>
       {data ? (
-        <>
+        <div>
           <Paper sx={{ paddingX: "20px", paddingY: "30px" }}>
             <div className="flex justify-between items-center">
               <Typography variant="h1" fontSize={25} paddingY={2}>
@@ -103,7 +103,7 @@ export default function Page({ params }: { params: { id: string } }) {
               />
             </Grid>
           </Grid>
-        </>
+        </div>
       ) : (
         <div className="py-16 w-full flex justify-center items-center">
           <CircularProgress />

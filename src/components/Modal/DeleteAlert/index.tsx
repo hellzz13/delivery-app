@@ -35,7 +35,7 @@ export default function DeleteAlert({
   }
 
   return (
-    <>
+    <span>
       <Button
         variant="contained"
         color="error"
@@ -96,6 +96,6 @@ export default function DeleteAlert({
           </Box>
         </Box>
       </Modal>
-    </>
+    </span>
   );
 }

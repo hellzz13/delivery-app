@@ -73,7 +73,7 @@ export default function Page({ params }: { params: { id: string } }) {
   return (
     <Container style={{ marginTop: "110px" }}>
       {data ? (
-        <>
+        <span>
           <Paper
             sx={{ paddingX: "20px", paddingY: "30px" }}
             component="form"
@@ -112,12 +112,12 @@ export default function Page({ params }: { params: { id: string } }) {
             >
               <Grid item xs={2} sm={4} md={4}>
                 {!isEditable ? (
-                  <>
+                  <span>
                     <label className="font-bold">Nome </label>
                     <div className="h-12 w-full flex items-center">
                       <Typography>{data.nome}</Typography>
                     </div>
-                  </>
+                  </span>
                 ) : (
                   <div>
                     {" "}
@@ -142,12 +142,12 @@ export default function Page({ params }: { params: { id: string } }) {
               </Grid>
               <Grid item xs={2} sm={4} md={4}>
                 {!isEditable ? (
-                  <>
+                  <span>
                     <label className="font-bold">Documento </label>
                     <div className="h-12 w-full flex items-center">
                       <Typography>{data.numeroDocumento}</Typography>
                     </div>
-                  </>
+                  </span>
                 ) : (
                   <div>
                     {" "}
@@ -172,12 +172,12 @@ export default function Page({ params }: { params: { id: string } }) {
 
               <Grid item xs={2} sm={4} md={4}>
                 {!isEditable ? (
-                  <>
+                  <span>
                     <label className="font-bold">Tipo de documento </label>
                     <div className="h-12 w-full flex items-center">
                       <Typography>{data.tipoDocumento}</Typography>
                     </div>
-                  </>
+                  </span>
                 ) : (
                   <div>
                     {" "}
@@ -200,12 +200,12 @@ export default function Page({ params }: { params: { id: string } }) {
               </Grid>
               <Grid item xs={2} sm={4} md={4}>
                 {!isEditable ? (
-                  <>
+                  <span>
                     <label className="font-bold">Rua </label>
                     <div className="h-12 w-full flex items-center">
                       <Typography>{data.logradouro}</Typography>
                     </div>
-                  </>
+                  </span>
                 ) : (
                   <div>
                     {" "}
@@ -231,12 +231,12 @@ export default function Page({ params }: { params: { id: string } }) {
               </Grid>
               <Grid item xs={2} sm={4} md={4}>
                 {!isEditable ? (
-                  <>
+                  <span>
                     <label className="font-bold">Número </label>
                     <div className="h-12 w-full flex items-center">
                       <Typography>{data.numero}</Typography>
                     </div>
-                  </>
+                  </span>
                 ) : (
                   <div>
                     {" "}
@@ -261,12 +261,12 @@ export default function Page({ params }: { params: { id: string } }) {
               </Grid>
               <Grid item xs={2} sm={4} md={4}>
                 {!isEditable ? (
-                  <>
+                  <span>
                     <label className="font-bold">Bairro </label>
                     <div className="h-12 w-full flex items-center">
                       <Typography>{data.bairro}</Typography>
                     </div>
-                  </>
+                  </span>
                 ) : (
                   <div>
                     {" "}
@@ -290,12 +290,12 @@ export default function Page({ params }: { params: { id: string } }) {
               </Grid>
               <Grid item xs={2} sm={4} md={4}>
                 {!isEditable ? (
-                  <>
+                  <span>
                     <label className="font-bold">Cidade </label>
                     <div className="h-12 w-full flex items-center">
                       <Typography>{data.cidade}</Typography>
                     </div>
-                  </>
+                  </span>
                 ) : (
                   <div>
                     {" "}
@@ -319,12 +319,12 @@ export default function Page({ params }: { params: { id: string } }) {
               </Grid>
               <Grid item xs={2} sm={4} md={4}>
                 {!isEditable ? (
-                  <>
+                  <span>
                     <label className="font-bold">UF </label>
                     <div className="h-12 w-full flex items-center">
                       <Typography>{data.uf}</Typography>
                     </div>
-                  </>
+                  </span>
                 ) : (
                   <div>
                     {" "}
@@ -375,7 +375,7 @@ export default function Page({ params }: { params: { id: string } }) {
               />
             </Grid>
           </Grid>
-        </>
+        </span>
       ) : (
         <div className="py-16 w-full flex justify-center items-center">
           <CircularProgress />

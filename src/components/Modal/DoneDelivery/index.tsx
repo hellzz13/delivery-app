@@ -34,7 +34,7 @@ export default function DoneDelivery({ id, name }: IDoneDelivery) {
     await back();
   }, [back, id]);
   return (
-    <>
+    <span>
       <Button
         variant="contained"
         color="success"
@@ -96,6 +96,6 @@ export default function DoneDelivery({ id, name }: IDoneDelivery) {
           </Box>
         </Box>
       </Modal>
-    </>
+    </span>
   );
 }

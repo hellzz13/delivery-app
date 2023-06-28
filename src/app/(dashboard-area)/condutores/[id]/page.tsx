@@ -70,7 +70,7 @@ export default function Page({ params }: { params: { id: string } }) {
   return (
     <Container style={{ marginTop: "110px" }}>
       {data ? (
-        <>
+        <div>
           <Paper
             sx={{ paddingX: "20px", paddingY: "30px" }}
             component="form"
@@ -109,12 +109,12 @@ export default function Page({ params }: { params: { id: string } }) {
             >
               <Grid item xs={2} sm={4} md={4}>
                 {!isEditable ? (
-                  <>
+                  <span>
                     <label className="font-bold">Nome </label>
                     <div className="h-12 w-full flex items-center">
                       <Typography>{data.nome}</Typography>
                     </div>
-                  </>
+                  </span>
                 ) : (
                   <div>
                     {" "}
@@ -137,12 +137,12 @@ export default function Page({ params }: { params: { id: string } }) {
               </Grid>
               <Grid item xs={2} sm={4} md={4}>
                 {!isEditable ? (
-                  <>
+                  <span>
                     <label className="font-bold">CNH </label>
                     <div className="h-12 w-full flex items-center">
                       <Typography>{data.nome}</Typography>
                     </div>
-                  </>
+                  </span>
                 ) : (
                   <div>
                     {" "}
@@ -165,14 +165,14 @@ export default function Page({ params }: { params: { id: string } }) {
               </Grid>
               <Grid item xs={2} sm={4} md={4}>
                 {!isEditable ? (
-                  <>
+                  <span>
                     <label className="font-bold">Nome </label>
                     <div className="h-12 w-full flex items-center">
                       <Typography>
                         {dayjs(data.vencimentoHabilitacao).format("DD/MM/YYYY")}
                       </Typography>
                     </div>
-                  </>
+                  </span>
                 ) : (
                   <div>
                     {" "}
@@ -201,14 +201,14 @@ export default function Page({ params }: { params: { id: string } }) {
               </Grid>
               <Grid item xs={2} sm={4} md={4}>
                 {!isEditable ? (
-                  <>
+                  <span>
                     <label className="font-bold">
                       Categoria da Habilitação{" "}
                     </label>
                     <div className="h-12 w-full flex items-center">
                       <Typography>{data.catergoriaHabilitacao}</Typography>
                     </div>
-                  </>
+                  </span>
                 ) : (
                   <div>
                     {" "}
@@ -262,7 +262,7 @@ export default function Page({ params }: { params: { id: string } }) {
               />
             </Grid>
           </Grid>
-        </>
+        </div>
       ) : (
         <div className="py-16 w-full flex justify-center items-center">
           <CircularProgress />

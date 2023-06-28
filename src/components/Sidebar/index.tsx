@@ -21,6 +21,8 @@ import Typography from "@mui/material/Typography";
 import Image from "next/image";
 import { Icon } from "@mui/material";
 import { useRouter, usePathname } from "next/navigation";
+import { Context } from "@/context/AuthContexts";
+import { useContext } from "react";
 
 const drawerWidth = 240;
 
@@ -32,6 +34,8 @@ interface Props {
 export default function Sidebar(props: Props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const { handleLogOut } = useContext(Context);
 
   const router = useRouter();
   const pathname = usePathname();
@@ -108,6 +112,7 @@ export default function Sidebar(props: Props) {
       <ListItem disablePadding>
         <ListItemButton
           sx={{ color: "#fff", ":hover": { backgroundColor: "#1e2535" } }}
+          onClick={() => handleLogOut()}
         >
           <ListItemIcon>
             <Icon color="primary">logout</Icon>
