@@ -2,6 +2,7 @@
 
 import DeleteAlert from "@/components/Modal/DeleteAlert";
 import DoneDelivery from "@/components/Modal/DoneDelivery";
+import ToastNotification from "@/components/ToastNotification";
 import TruckAnimation from "@/components/TruckLoading";
 import { useDetails } from "@/hooks/useDetails.hook";
 import { Delivery } from "@/models/Delivery";
@@ -27,6 +28,7 @@ export default function Page({ params }: { params: { id: string } }) {
 
   return (
     <Container style={{ marginTop: "110px" }}>
+      <ToastNotification />
       {data ? (
         <div>
           <Paper sx={{ paddingX: "20px", paddingY: "30px" }}>

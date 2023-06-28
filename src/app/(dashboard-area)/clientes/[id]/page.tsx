@@ -157,7 +157,7 @@ export default function Page({ params }: { params: { id: string } }) {
                   <div>
                     {" "}
                     <TextField
-                      {...register("numero")}
+                      {...register("numeroDocumento")}
                       InputLabelProps={{
                         shrink: true,
                       }}

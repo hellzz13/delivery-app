@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { style } from "./style";
 import { useCallback } from "react";
 import { toast } from "react-toastify";
+import ToastNotification from "@/components/ToastNotification";
 
 interface IDoneDelivery {
   name: string;
@@ -32,8 +33,8 @@ export default function DoneDelivery({ id, name }: IDoneDelivery) {
     };
 
     await api.put(`Deslocamento/${id}/EncerrarDeslocamento`, values);
+    await toast.success("Concluido com sucesso!");
     await back();
-    toast.success("Concluido com sucesso!");
   }, [back, id]);
   return (
     <span>
