@@ -30,6 +30,8 @@ Por fim, abra [http://localhost:3000](http://localhost:3000/) em seu navegador p
 
 O projeto é um MPV onde podemos validar a ideia de deslocamento. Abaixo podemos listar algumas melhorias a serem aplicadas futuramente:
 
+- Foi utilizado para simular um login e um cadastro um arquivo simples em JS que utiliza o localStorage para fazer a gestão de autenticação. Isso pode gerar algumas conflitos com o dom e de fato não é uma segurança para o sistema de fato já que o API é publica. Então uma melhoria seria pegar uma autenticação de usuário após ser implementado no API.
+
 ## **Tools and libs:**
 
 - NextJs 13.4.5

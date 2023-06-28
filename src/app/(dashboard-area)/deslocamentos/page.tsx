@@ -9,7 +9,7 @@ import { useTable } from "@/hooks/useTable.hook";
 import { Column } from "@/models/Columns";
 import { Delivery } from "@/models/Delivery";
 import { get } from "@/services/api";
-import { CircularProgress, Container, Paper, Typography } from "@mui/material";
+import { Container, Paper, Typography } from "@mui/material";
 import { useContext, useEffect } from "react";
 
 export default function DeliveryPage() {

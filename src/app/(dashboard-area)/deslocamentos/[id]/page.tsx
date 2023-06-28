@@ -2,12 +2,12 @@
 
 import DeleteAlert from "@/components/Modal/DeleteAlert";
 import DoneDelivery from "@/components/Modal/DoneDelivery";
+import TruckAnimation from "@/components/TruckLoading";
 import { useDetails } from "@/hooks/useDetails.hook";
 import { Delivery } from "@/models/Delivery";
 import { get, remove, update } from "@/services/api";
 import {
   Button,
-  CircularProgress,
   Container,
   Divider,
   Grid,
@@ -105,9 +105,7 @@ export default function Page({ params }: { params: { id: string } }) {
           </Grid>
         </div>
       ) : (
-        <div className="py-16 w-full flex justify-center items-center">
-          <CircularProgress />
-        </div>
+        <TruckAnimation />
       )}
     </Container>
   );

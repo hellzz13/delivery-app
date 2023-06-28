@@ -24,6 +24,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { Context } from "@/context/AuthContexts";
 import { useContext, useEffect } from "react";
 import TruckAnimation from "../TruckLoading";
+import LogOutAlert from "../Modal/LogoutAlert";
 
 const drawerWidth = 240;
 
@@ -110,7 +111,9 @@ export default function Sidebar(props: Props) {
       </List>
       <Divider />
 
-      <ListItem disablePadding>
+      <LogOutAlert name="logout" action={handleLogOut} />
+
+      {/* <ListItem disablePadding>
         <ListItemButton
           sx={{ color: "#fff", ":hover": { backgroundColor: "#1e2535" } }}
           onClick={() => handleLogOut()}
@@ -120,7 +123,7 @@ export default function Sidebar(props: Props) {
           </ListItemIcon>
           <ListItemText primary="Logout" />
         </ListItemButton>
-      </ListItem>
+      </ListItem> */}
     </div>
   );
 

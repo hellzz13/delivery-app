@@ -6,7 +6,6 @@ import { Consumer } from "@/models/Consumer";
 import { get, remove, update } from "@/services/api";
 import {
   Button,
-  CircularProgress,
   Container,
   Divider,
   Grid,
@@ -16,12 +15,13 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import TruckAnimation from "@/components/TruckLoading";
 
 export default function Page({ params }: { params: { id: string } }) {
   const { back } = useRouter();
@@ -377,9 +377,7 @@ export default function Page({ params }: { params: { id: string } }) {
           </Grid>
         </span>
       ) : (
-        <div className="py-16 w-full flex justify-center items-center">
-          <CircularProgress />
-        </div>
+        <TruckAnimation />
       )}
     </Container>
   );

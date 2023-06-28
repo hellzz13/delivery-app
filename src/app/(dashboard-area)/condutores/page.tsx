@@ -8,7 +8,7 @@ import { useTable } from "@/hooks/useTable.hook";
 import { Column } from "@/models/Columns";
 import { Drivers } from "@/models/Drivers";
 import { get } from "@/services/api";
-import { CircularProgress, Container, Paper, Typography } from "@mui/material";
+import { Container, Paper, Typography } from "@mui/material";
 
 export default function DriversPage() {
   const { handleChangePage, handleChangeRowsPerPage, rows, page, rowsPerPage } =
