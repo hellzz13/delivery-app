@@ -7,13 +7,14 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { CircularProgress, Grid, TextField } from "@mui/material";
 
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import AddButton from "../../Button/AddButton";
 import api from "@/services/api";
 import { useRequest } from "@/hooks/useRequest.hook";
+import ReactInputMask from "react-input-mask";
 
 const style = {
   position: "absolute" as "absolute",
@@ -50,6 +51,8 @@ export default function FormConsumers() {
     register,
     handleSubmit,
     reset,
+    control,
+    setValue,
     formState: { errors },
   } = useForm<CreateConsumerFormData>({
     resolver: zodResolver(CreateConsumerSchema),
@@ -63,6 +66,10 @@ export default function FormConsumers() {
     reset({});
     return data;
   };
+
+  React.useEffect(() => {
+    setValue("tipoDocumento", "CPF");
+  }, [setValue]);
 
   const { onSubmit, isLoading } = useRequest<CreateConsumerFormData>(
     createConsumer,
@@ -121,23 +128,31 @@ export default function FormConsumers() {
                 )}
               </Grid>
               <Grid item xs={2} sm={8} md={6}>
-                <TextField
-                  {...register("numeroDocumento")}
-                  margin="normal"
-                  required
-                  fullWidth
+                <Controller
                   name="numeroDocumento"
-                  label="Documento"
-                  id="numeroDocumento"
-                  variant="filled"
+                  control={control}
+                  render={({ field }) => (
+                    <ReactInputMask
+                      mask="999.999.999-99"
+                      maxLength={11}
+                      {...field}
+                      disabled={false}
+                    >
+                      <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="numeroDocumento"
+                        label="CPF"
+                        name="numeroDocumento"
+                        autoComplete="numeroDocumento"
+                        variant="filled"
+                      />
+                    </ReactInputMask>
+                  )}
                 />
-                {errors.numeroDocumento && (
-                  <span className="text-red-error text-sm">
-                    {errors.numeroDocumento.message}
-                  </span>
-                )}
               </Grid>
-              <Grid item xs={2} sm={8} md={6}>
+              {/* <Grid item xs={2} sm={8} md={6}>
                 <TextField
                   {...register("tipoDocumento")}
                   margin="normal"
@@ -153,7 +168,7 @@ export default function FormConsumers() {
                     {errors.tipoDocumento.message}
                   </span>
                 )}
-              </Grid>
+              </Grid> */}
               <Grid item xs={2} sm={8} md={8}>
                 <TextField
                   {...register("logradouro")}

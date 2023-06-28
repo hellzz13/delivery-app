@@ -10,9 +10,10 @@ import {
   FormControl,
   InputLabel,
   TextField,
+  TextFieldProps,
 } from "@mui/material";
 
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -20,6 +21,8 @@ import AddButton from "../../Button/AddButton";
 import api from "@/services/api";
 import { useRequest } from "@/hooks/useRequest.hook";
 import { useCallback } from "react";
+
+import ReactInputMask from "react-input-mask";
 
 const style = {
   position: "absolute" as "absolute",
@@ -54,6 +57,7 @@ export default function FormDrivers() {
     register,
     handleSubmit,
     reset,
+    control,
     formState: { errors },
   } = useForm<CreateDriverFormData>({
     resolver: zodResolver(CreateDriverSchema),
@@ -100,34 +104,54 @@ export default function FormDrivers() {
             onSubmit={handleSubmit(onSubmit)}
             sx={{ mt: 1 }}
           >
-            <TextField
-              {...register("nome")}
-              margin="normal"
-              required
-              fullWidth
-              id="name"
-              label="Nome"
+            <Controller
               name="nome"
-              autoComplete="nome"
-              variant="filled"
-              autoFocus
+              control={control}
+              render={({ field }) => (
+                <ReactInputMask mask="" {...field} disabled={false}>
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="name"
+                    label="Nome"
+                    name="nome"
+                    autoComplete="nome"
+                    variant="filled"
+                    autoFocus
+                  />
+                </ReactInputMask>
+              )}
             />
             {errors.nome && (
               <span className="text-red-error text-sm">
                 {errors.nome.message}
               </span>
             )}
-            <TextField
-              {...register("numeroHabilitacao")}
-              margin="normal"
-              required
-              fullWidth
+
+            <Controller
               name="numeroHabilitacao"
-              label="Habilitação"
-              id="numeroHabilitacao"
-              variant="filled"
-              type="number"
+              control={control}
+              render={({ field }) => (
+                <ReactInputMask mask="99999999999" {...field} disabled={false}>
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="numeroHabilitacao"
+                    label="Habilicação"
+                    name="numeroHabilitacao"
+                    autoComplete="numeroHabilitacao"
+                    variant="filled"
+                  />
+                </ReactInputMask>
+              )}
             />
+            {errors.nome && (
+              <span className="text-red-error text-sm">
+                {errors.nome.message}
+              </span>
+            )}
             {errors.numeroHabilitacao && (
               <span className="text-red-error text-sm">
                 {errors.numeroHabilitacao.message}

@@ -7,13 +7,14 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { CircularProgress, TextField } from "@mui/material";
 
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import AddButton from "../../Button/AddButton";
 import api from "@/services/api";
 import { useRequest } from "@/hooks/useRequest.hook";
+import ReactInputMask from "react-input-mask";
 
 const style = {
   position: "absolute" as "absolute",
@@ -52,6 +53,7 @@ export default function FormVehicles() {
     register,
     handleSubmit,
     reset,
+    control,
     formState: { errors },
   } = useForm<CreateVehicleFormData>({
     resolver: zodResolver(CreateVehicleSchema),
@@ -96,18 +98,25 @@ export default function FormVehicles() {
             onSubmit={handleSubmit(onSubmit)}
             sx={{ mt: 1 }}
           >
-            <TextField
-              {...register("placa")}
-              margin="normal"
-              required
-              fullWidth
-              id="placa"
-              label="Placa"
+            <Controller
               name="placa"
-              autoComplete="placa"
-              variant="filled"
-              autoFocus
+              control={control}
+              render={({ field }) => (
+                <ReactInputMask mask="aaa-9*99" {...field} disabled={false}>
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="placa"
+                    label="Placa"
+                    name="placa"
+                    autoComplete="placa"
+                    variant="filled"
+                  />
+                </ReactInputMask>
+              )}
             />
+
             {errors.placa && (
               <span className="text-red-error text-sm">
                 {errors.placa.message}
@@ -129,33 +138,46 @@ export default function FormVehicles() {
               </span>
             )}
 
-            <TextField
-              {...register("anoFabricacao")}
-              margin="normal"
-              required
-              fullWidth
+            <Controller
               name="anoFabricacao"
-              label="Ano de fabricação"
-              id="anoFabricacao"
-              variant="filled"
-              type="number"
+              control={control}
+              render={({ field }) => (
+                <ReactInputMask mask="9999" {...field} disabled={false}>
+                  <TextField
+                    required
+                    fullWidth
+                    name="anoFabricacao"
+                    label="Ano de fabricação"
+                    id="anoFabricacao"
+                    variant="filled"
+                  />
+                </ReactInputMask>
+              )}
             />
             {errors.anoFabricacao && (
               <span className="text-red-error text-sm">
                 {errors.anoFabricacao.message}
               </span>
             )}
-            <TextField
-              {...register("kmAtual")}
-              margin="normal"
-              required
-              fullWidth
+
+            <Controller
               name="kmAtual"
-              label="Km Atual"
-              id="kmAtual"
-              variant="filled"
-              type="number"
+              control={control}
+              render={({ field }) => (
+                <ReactInputMask mask="99999999" {...field} disabled={false}>
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="kmAtual"
+                    label="Km Atual"
+                    id="kmAtual"
+                    variant="filled"
+                  />
+                </ReactInputMask>
+              )}
             />
+
             {errors.kmAtual && (
               <span className="text-red-error text-sm">
                 {errors.kmAtual.message}

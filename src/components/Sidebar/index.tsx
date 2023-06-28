@@ -112,18 +112,6 @@ export default function Sidebar(props: Props) {
       <Divider />
 
       <LogOutAlert name="logout" action={handleLogOut} />
-
-      {/* <ListItem disablePadding>
-        <ListItemButton
-          sx={{ color: "#fff", ":hover": { backgroundColor: "#1e2535" } }}
-          onClick={() => handleLogOut()}
-        >
-          <ListItemIcon>
-            <Icon color="primary">logout</Icon>
-          </ListItemIcon>
-          <ListItemText primary="Logout" />
-        </ListItemButton>
-      </ListItem> */}
     </div>
   );
 

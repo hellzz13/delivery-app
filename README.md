@@ -42,6 +42,7 @@ O projeto é um MPV onde podemos validar a ideia de deslocamento. Abaixo podemos
 - Dayjs 1.11.8
 - React Hook Form 7.43.9
 - Zod 3.21.4
+- React Input Mask
 
 ## **Deploy on Vercel**
 
