@@ -54,7 +54,7 @@ export default function CreateUser() {
   }
 
   return (
-    <main className="container flex justify-center items-center mx-auto h-screen">
+    <main className="container flex justify-center items-center mx-auto h-screen max-w-md">
       <Paper
         className="backdrop-blur-3xl bg-opacity-70 p-3 rounded-3xl"
         elevation={24}
