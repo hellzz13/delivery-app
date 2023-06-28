@@ -144,4 +144,4 @@ class AuthFakerApi {
   }
 }
 
-export default window.AuthFakerApi = new AuthFakerApi();
+export default AuthFakerApi = new AuthFakerApi();
