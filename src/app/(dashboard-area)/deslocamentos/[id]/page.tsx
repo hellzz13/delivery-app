@@ -19,7 +19,11 @@ import { useRouter } from "next/navigation";
 
 export default function Page({ params }: { params: { id: string } }) {
   const { back } = useRouter();
-  const { data } = useDetails<Delivery>(get.getDeliveryById, params.id);
+  const { data } = useDetails<Delivery>(
+    get.getDeliveryById,
+    params.id,
+    "deliverys"
+  );
 
   return (
     <Container style={{ marginTop: "110px" }}>

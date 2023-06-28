@@ -25,7 +25,11 @@ import TruckAnimation from "@/components/TruckLoading";
 
 export default function Page({ params }: { params: { id: string } }) {
   const { back } = useRouter();
-  const { data } = useDetails<Vehicle>(get.getVehicleById, params.id);
+  const { data } = useDetails<Vehicle>(
+    get.getVehicleById,
+    params.id,
+    "vehicles"
+  );
   const [isEditable, setIsEditable] = useState(false);
 
   const UpdateVehicleSchema = z.object({

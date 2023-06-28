@@ -1,14 +1,11 @@
-import * as React from "react";
+import { useQuery } from "react-query";
 
 export function useDetails<T>(
   fetchData: (id: string) => Promise<T>,
-  id: string
+  id: string,
+  queryKey: string
 ) {
-  const [data, setData] = React.useState<T | undefined>(undefined);
-
-  React.useEffect(() => {
-    fetchData(id).then((res: T) => setData(res));
-  }, [fetchData, id]);
+  const { data } = useQuery([queryKey, id], () => fetchData(id));
 
   return {
     data,

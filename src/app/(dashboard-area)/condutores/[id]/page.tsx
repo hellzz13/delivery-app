@@ -23,10 +23,15 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import TruckAnimation from "@/components/TruckLoading";
+import { useMutation } from "react-query";
 
 export default function Page({ params }: { params: { id: string } }) {
-  const { back } = useRouter();
-  const { data } = useDetails<Drivers>(get.getDriversById, params.id);
+  const { back, push } = useRouter();
+  const { data } = useDetails<Drivers>(
+    get.getDriversById,
+    params.id,
+    "drivers"
+  );
 
   const [isEditable, setIsEditable] = useState(false);
 
@@ -61,11 +66,23 @@ export default function Page({ params }: { params: { id: string } }) {
 
   const handleUpdateDrivers = useCallback(
     (values: UpdateDriverFormData) => {
-      update.changeData<Partial<Drivers>>(values, params.id, "Condutor");
+      const { data }: any = update.changeData<Partial<Drivers>>(
+        values,
+        params.id,
+        "Condutor"
+      );
       setIsEditable(false);
+      push("/condutores");
+      return data;
     },
-    [params.id]
+    [params.id, push]
   );
+
+  const { mutate } = useMutation(handleUpdateDrivers);
+
+  const onsubmit = (data: UpdateDriverFormData) => {
+    mutate(data);
+  };
 
   return (
     <Container style={{ marginTop: "110px" }}>
@@ -74,7 +91,7 @@ export default function Page({ params }: { params: { id: string } }) {
           <Paper
             sx={{ paddingX: "20px", paddingY: "30px" }}
             component="form"
-            onSubmit={handleSubmit(handleUpdateDrivers)}
+            onSubmit={handleSubmit(onsubmit)}
           >
             <div className="flex justify-between items-center">
               <Typography variant="h1" fontSize={25} paddingY={2}>
