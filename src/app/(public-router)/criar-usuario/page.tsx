@@ -19,11 +19,16 @@ import { toast } from "react-toastify";
 import { useCallback } from "react";
 
 export default function CreateUser() {
-  const CreateUserSchema = z.object({
-    username: z.string().nonempty("Campo obrigatório"),
-    password: z.string().nonempty("Campo obrigatório"),
-    confirmPassword: z.string().nonempty("Campo obrigatório"),
-  });
+  const CreateUserSchema = z
+    .object({
+      username: z.string().nonempty("Campo obrigatório"),
+      password: z.string().nonempty("Campo obrigatório"),
+      confirmPassword: z.string().nonempty("Campo obrigatório"),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+      path: ["confirmPassword"],
+      message: "A senhas precisam ser iguais",
+    });
 
   const { push } = useRouter();
 
