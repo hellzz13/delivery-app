@@ -2,7 +2,7 @@
 
 Sobre o Projeto
 
-O projeto é um interface criada para gerenciar uma API de deslocamento, onde podemos fazer o CRUD dos dados fornecidos pela mesma.
+O projeto é um interface criada para gerenciar uma API de deslocamento, onde podemos fazer o CRUD dos dados fornecidos pela mesma. Seguindo a interação e o fluxo de entrega, onde o usuário pode operar a dashboard e listar, cadastrar, editar e deletar dados de veiculos, condutores, clientes e com isso interagir com os deslocamentos.
 
 ## **Getting Started**
 
@@ -31,6 +31,10 @@ Por fim, abra [http://localhost:3000](http://localhost:3000/) em seu navegador p
 O projeto é um MPV onde podemos validar a ideia de deslocamento. Abaixo podemos listar algumas melhorias a serem aplicadas futuramente:
 
 - Foi utilizado para simular um login e um cadastro um arquivo simples em JS que utiliza o localStorage para fazer a gestão de autenticação. Isso pode gerar algumas conflitos com o dom e de fato não é uma segurança para o sistema de fato já que o API é publica. Então uma melhoria seria pegar uma autenticação de usuário após ser implementado no API.
+
+- O kmFinal pode ser utilizado como interação com o km do veiculo para atualizar o mesmo.
+
+-
 
 ## **Tools and libs:**
 
