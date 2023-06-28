@@ -17,24 +17,25 @@ import { useContext, useEffect, useState } from "react";
 import { Context } from "@/context/AuthContexts";
 import { Typography } from "@mui/material";
 
-export default function Login() {
+export default function CreateUser() {
   const router = useRouter();
 
   const { handleLogin } = useContext(Context);
 
-  const UserSchema = z.object({
+  const CreateUserSchema = z.object({
     username: z.string().nonempty("Campo obrigatório"),
     password: z.string().nonempty("Campo obrigatório"),
+    confirmPassword: z.string().nonempty("Campo obrigatório"),
   });
 
-  type UserFormData = z.infer<typeof UserSchema>;
+  type CreateUserFormData = z.infer<typeof CreateUserSchema>;
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<UserFormData>({
-    resolver: zodResolver(UserSchema),
+  } = useForm<CreateUserFormData>({
+    resolver: zodResolver(CreateUserSchema),
   });
 
   return (
@@ -96,21 +97,33 @@ export default function Login() {
               error={!!errors.password}
               helperText={errors.password && errors.password.message}
             />
+            <TextField
+              {...register("confirmPassword")}
+              margin="normal"
+              required
+              fullWidth
+              name="confirmPassword"
+              label="Confirmar Senha"
+              type="confirmPassword"
+              id="confirmPassword"
+              autoComplete="current-confirmPassword"
+              error={!!errors.confirmPassword}
+              helperText={
+                errors.confirmPassword && errors.confirmPassword.message
+              }
+            />
 
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              onClick={() => router.push("/")}
             >
               Entrar
             </Button>
             <Grid container>
               <Grid item>
-                <Link href="/criar-usuario">
-                  {"Não tem uma conta? Cadastre-se!"}
-                </Link>
+                <Link href="/">{"Voltar para login"}</Link>
               </Grid>
             </Grid>
           </Box>

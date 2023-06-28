@@ -1,5 +1,4 @@
 "use client";
-import LoginPage from "@/components/Login";
 import { Context } from "@/context/AuthContexts";
 import { useContext } from "react";
 import { useRouter } from "next/navigation";

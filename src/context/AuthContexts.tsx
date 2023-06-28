@@ -2,7 +2,7 @@
 import { createContext, useCallback, useEffect, useState } from "react";
 
 import api from "../services/authFakeApi";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { UserProps } from "@/models/Users";
 import ToastNotification from "@/components/ToastNotification";
 import { toast } from "react-toastify";
@@ -15,42 +15,33 @@ type LoginData = {
 type AuthProps = {
   authenticated: boolean;
   handleLogin: (data: LoginData) => Promise<void>;
-  loading: boolean;
   handleLogOut: () => void;
   user: UserProps | null;
-  isActiveLogin: boolean;
-  setIsActiveLogin: (state: boolean) => void;
 };
 
 const DEFAULT_VALUE = {
   authenticated: false,
   handleLogin: async () => {},
-  loading: true,
   handleLogOut: () => {},
   user: null,
-  isActiveLogin: false,
-  setIsActiveLogin: () => {},
 };
 
 const Context = createContext<AuthProps>(DEFAULT_VALUE);
 
-const AuthProvider = ({ children }: any) => {
+const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [authenticated, setAuthenticated] = useState(
     DEFAULT_VALUE.authenticated
   );
-  const [loading, setLoading] = useState(DEFAULT_VALUE.loading);
   const [user, setUser] = useState(DEFAULT_VALUE.user);
-  const [isActiveLogin, setIsActiveLogin] = useState(
-    DEFAULT_VALUE.isActiveLogin
-  );
 
   const { push } = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
-    if (!authenticated) {
+    if (!authenticated && !pathname.startsWith("/criar-usuar")) {
       return push("/");
     }
-  }, [authenticated, push]);
+  }, [authenticated, pathname, push]);
 
   async function getUserData() {
     const { data } = await api.get("/me", {});
@@ -62,12 +53,14 @@ const AuthProvider = ({ children }: any) => {
 
     if (token) {
       setAuthenticated(true);
-      setLoading(false);
       getUserData();
     }
   }, []);
 
-  async function handleLogin({ username, password }: LoginData) {
+  const handleLogin = useCallback(async function handleLogin({
+    username,
+    password,
+  }: LoginData) {
     console.log(username, password);
     await api
       .post("/login", {
@@ -76,14 +69,14 @@ const AuthProvider = ({ children }: any) => {
       })
       .catch((e) => {
         toast.error(e.message);
-      });
+      })
+      .finally(() => toast.success("Login efetuado!"));
 
-    push("/");
     const { data } = await api.get("/me", {});
     setUser(data);
     setAuthenticated(true);
-    console.log(user);
-  }
+  },
+  []);
 
   const handleLogOut = useCallback(async () => {
     await api.post("/logout", {});
@@ -95,11 +88,8 @@ const AuthProvider = ({ children }: any) => {
       value={{
         authenticated,
         handleLogin,
-        loading,
         handleLogOut,
         user,
-        isActiveLogin,
-        setIsActiveLogin,
       }}
     >
       {children}

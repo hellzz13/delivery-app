@@ -22,7 +22,8 @@ import Image from "next/image";
 import { Icon } from "@mui/material";
 import { useRouter, usePathname } from "next/navigation";
 import { Context } from "@/context/AuthContexts";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import TruckAnimation from "../TruckLoading";
 
 const drawerWidth = 240;
 
@@ -35,7 +36,7 @@ export default function Sidebar(props: Props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  const { handleLogOut } = useContext(Context);
+  const { handleLogOut, authenticated } = useContext(Context);
 
   const router = useRouter();
   const pathname = usePathname();

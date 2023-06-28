@@ -3,6 +3,7 @@
 import FormConsumers from "@/components/Modal/FormConsumer";
 import TableBase from "@/components/TableBase";
 import ToastNotification from "@/components/ToastNotification";
+import TruckAnimation from "@/components/TruckLoading";
 import { useTable } from "@/hooks/useTable.hook";
 import { Column } from "@/models/Columns";
 import { Consumer } from "@/models/Consumer";
@@ -40,9 +41,9 @@ export default function ConsumersPage() {
     <Container>
       <FormConsumers />
       <ToastNotification />
-      <Paper sx={{ width: "100%", overflow: "hidden", marginTop: "100px" }}>
-        {rows ? (
-          rows.length >= 1 ? (
+      {rows ? (
+        rows.length >= 1 ? (
+          <Paper sx={{ width: "100%", overflow: "hidden", marginTop: "100px" }}>
             <TableBase
               handleChangePage={handleChangePage}
               handleChangeRowsPerPage={handleChangeRowsPerPage}
@@ -51,19 +52,19 @@ export default function ConsumersPage() {
               rowsPerPage={rowsPerPage}
               columns={columns}
             />
-          ) : (
+          </Paper>
+        ) : (
+          <Paper sx={{ width: "100%", overflow: "hidden", marginTop: "100px" }}>
             <div className="py-16 w-full flex justify-center items-center">
               <Typography variant="body1">
                 Não há dados à serem exibidos
               </Typography>
             </div>
-          )
-        ) : (
-          <div className="py-16 w-full flex justify-center items-center">
-            <CircularProgress />
-          </div>
-        )}
-      </Paper>
+          </Paper>
+        )
+      ) : (
+        <TruckAnimation />
+      )}
     </Container>
   );
 }
