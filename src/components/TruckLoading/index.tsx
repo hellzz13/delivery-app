@@ -22,7 +22,10 @@ export default function TruckAnimation() {
   return (
     <div className="flex justify-center items-center w-full h-full flex-col mb-10">
       <TruckLoading />
-      <Typography sx={{ marginTop: "-40px" }}> Carregando...</Typography>
+      <Typography sx={{ marginTop: "-40px" }} color={"white"}>
+        {" "}
+        Carregando...
+      </Typography>
     </div>
   );
 }

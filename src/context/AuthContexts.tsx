@@ -67,10 +67,10 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         username: username,
         password: password,
       })
+      .then(() => toast.success("Login efetuado!"))
       .catch((e) => {
         toast.error(e.message);
-      })
-      .finally(() => toast.success("Login efetuado!"));
+      });
 
     const { data } = await api.get("/me", {});
     setUser(data);
